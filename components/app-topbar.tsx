@@ -14,10 +14,10 @@ export function AppTopbar({ title, eyebrow }: { title: string; eyebrow?: string 
             <span>Jump to agent, action…</span>
             <span className="ml-auto rounded px-1 py-0.5 bg-[color:var(--bg-soft)] text-[10px] font-mono border border-[color:var(--border)]">⌘K</span>
           </div>
-          <button className="btn btn-secondary h-9 px-3" title="Notifications">
+          <button type="button" className="btn btn-secondary h-9 px-3" title="Notifications">
             <svg viewBox="0 0 24 24" className="h-4 w-4" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round"><path d="M6 8a6 6 0 0112 0c0 7 3 9 3 9H3s3-2 3-9 M13.7 21a2 2 0 01-3.4 0" /></svg>
           </button>
-          <button className="btn btn-primary h-9 px-3 text-[13px]">
+          <button type="button" className="btn btn-primary h-9 px-3 text-[13px]">
             <svg viewBox="0 0 16 16" className="h-3.5 w-3.5" fill="none" stroke="currentColor" strokeWidth="2.2"><path d="M8 3v10M3 8h10" strokeLinecap="round" /></svg>
             New agent
           </button>
