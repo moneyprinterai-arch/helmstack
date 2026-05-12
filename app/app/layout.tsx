@@ -25,14 +25,14 @@ export default async function AppLayout({ children }: { children: React.ReactNod
     : { count: 0 };
 
   return (
-    <div className="min-h-screen app-grid">
+    <div className="min-h-screen">
       <AppSidebar
         workspaceName={workspace?.name ?? "Workspace"}
         userEmail={profile?.email ?? user.email ?? ""}
         userName={profile?.full_name ?? user.email?.split("@")[0] ?? "you"}
         pendingApprovals={pendingApprovals ?? 0}
       />
-      <div className="lg:pl-60">{children}</div>
+      <main className="lg:ml-60">{children}</main>
     </div>
   );
 }

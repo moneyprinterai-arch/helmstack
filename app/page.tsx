@@ -11,7 +11,6 @@ import { CTA } from "@/components/cta";
 export default function HomePage() {
   return (
     <>
-      <div className="mesh-bg" aria-hidden />
       <MarketingNav />
       <main>
         <Hero />

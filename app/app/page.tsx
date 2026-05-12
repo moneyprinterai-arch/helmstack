@@ -2,6 +2,38 @@ import Link from "next/link";
 import { AppTopbar } from "@/components/app-topbar";
 import { getWorkspace, getAgents, getPendingApprovals, getActivity, relativeTime } from "@/lib/queries";
 
+const ICON = {
+  agents: (
+    <svg viewBox="0 0 24 24" fill="none" strokeWidth="1.8" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" className="h-[18px] w-[18px]">
+      <circle cx="9" cy="8" r="3" />
+      <path d="M3 19c0-3 2.7-5 6-5s6 2 6 5" />
+      <circle cx="16" cy="10" r="2.5" />
+      <path d="M14.5 19c0-2.2 2-4 4.5-4" />
+    </svg>
+  ),
+  running: (
+    <svg viewBox="0 0 24 24" fill="none" strokeWidth="1.8" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" className="h-[18px] w-[18px]">
+      <path d="M5 12l5 5L20 7" />
+    </svg>
+  ),
+  awaiting: (
+    <svg viewBox="0 0 24 24" fill="none" strokeWidth="1.8" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" className="h-[18px] w-[18px]">
+      <circle cx="12" cy="12" r="8" />
+      <path d="M12 7v5l3 2" />
+    </svg>
+  ),
+  queue: (
+    <svg viewBox="0 0 24 24" fill="none" strokeWidth="1.8" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" className="h-[18px] w-[18px]">
+      <path d="M4 7h16" /><path d="M4 12h16" /><path d="M4 17h10" />
+    </svg>
+  ),
+  runs: (
+    <svg viewBox="0 0 24 24" fill="none" strokeWidth="1.8" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" className="h-[18px] w-[18px]">
+      <path d="M4 14a8 8 0 1116 0" /><path d="M12 14V6" /><path d="M8 18h8" />
+    </svg>
+  ),
+};
+
 const runtimeLabel: Record<string, string> = {
   "claude-code": "Claude Code",
   openai: "OpenAI",
@@ -12,16 +44,34 @@ const runtimeLabel: Record<string, string> = {
   other: "Custom",
 };
 
+const runtimeBorder: Record<string, string> = {
+  "claude-code": "border-l-sky-500",
+  openai: "border-l-emerald-500",
+  langgraph: "border-l-violet-500",
+  crewai: "border-l-amber-500",
+  autogen: "border-l-blue-500",
+  http: "border-l-stone-400",
+  other: "border-l-stone-300",
+};
+
+function greeting(): string {
+  const h = new Date().getHours();
+  if (h < 5) return "Good evening";
+  if (h < 12) return "Good morning";
+  if (h < 18) return "Good afternoon";
+  return "Good evening";
+}
+
 export default async function AppHome() {
   const workspace = await getWorkspace();
   if (!workspace) {
     return (
-      <main className="px-6 lg:px-10 py-8">
-        <div className="card p-8 max-w-xl">
-          <h2 className="text-lg font-semibold">No workspace yet</h2>
-          <p className="text-sm text-[color:var(--fg-muted)] mt-2">Your workspace is being provisioned. Refresh the page in a moment.</p>
+      <div className="mx-auto max-w-[1320px] px-5 sm:px-8 py-8">
+        <div className="rounded-3xl border border-white/50 bg-white/70 p-8 shadow-[0_2px_12px_rgba(0,0,0,0.05),inset_0_1px_0_rgba(255,255,255,0.8)] backdrop-blur-xl max-w-xl">
+          <h2 className="text-lg font-semibold text-zinc-900">No workspace yet</h2>
+          <p className="mt-2 text-sm text-zinc-600">Your workspace is being provisioned. Refresh in a moment.</p>
         </div>
-      </main>
+      </div>
     );
   }
 
@@ -32,191 +82,185 @@ export default async function AppHome() {
   ]);
 
   const running = agents.filter((a) => a.status === "running").length;
-  const todayTasks = agents.length * 14;
-  const isEmpty = agents.length === 0;
+  const awaiting = approvals.length;
+  const runsToday = agents.filter((a) => {
+    if (!a.last_activity_at) return false;
+    return Date.now() - new Date(a.last_activity_at).getTime() < 24 * 60 * 60 * 1000;
+  }).length;
+
+  const tiles = [
+    { label: "Agents", value: agents.length, accent: "text-zinc-900", icon: ICON.agents },
+    { label: "Running now", value: running, accent: running > 0 ? "text-emerald-600" : "text-zinc-900", icon: ICON.running },
+    { label: "Awaiting approval", value: awaiting, accent: awaiting > 0 ? "text-amber-600" : "text-zinc-900", icon: ICON.awaiting },
+    { label: "Queue depth", value: 0, accent: "text-zinc-900", icon: ICON.queue },
+    { label: "Runs today", value: runsToday, accent: "text-zinc-900", icon: ICON.runs },
+  ];
+
+  const userFirstName = "there";
+  const summary =
+    awaiting > 0
+      ? `${awaiting} approval${awaiting === 1 ? "" : "s"} pending. ${running} agent${running === 1 ? "" : "s"} running.`
+      : running > 0
+        ? `${running} agent${running === 1 ? "" : "s"} running. Fleet steady.`
+        : "Fleet idle.";
 
   return (
-    <>
-      <AppTopbar title={isEmpty ? "Welcome to Helmstack" : `${workspace.name} is steady`} eyebrow={isEmpty ? "Get started" : "Today"} />
-      <main className="px-6 lg:px-10 py-8 space-y-8 max-w-[1320px]">
-        {isEmpty ? (
-          <section className="card card-lift p-8 max-w-3xl">
-            <div className="section-eyebrow"><span className="dot" />Empty fleet</div>
-            <h2 className="hero-h1 mt-3 text-[28px] sm:text-[34px]">Add your first agent.</h2>
-            <p className="mt-3 text-[15px] text-[color:var(--fg-muted)] leading-relaxed">
-              Helmstack adopts agents you already run — Claude Code, OpenAI Assistants, LangGraph, or anything that speaks HTTP. Connect one and watch it from the deck.
-            </p>
-            <div className="mt-5 flex flex-wrap gap-2">
-              <Link href="/app/agents" className="btn btn-primary h-9 px-3.5 text-[13px]">Add agent</Link>
-              <Link href="/docs/quickstart" className="btn btn-secondary h-9 px-3.5 text-[13px]">Read the quickstart</Link>
+    <div className="mx-auto max-w-[1320px] space-y-7 px-5 py-6 sm:px-8 sm:py-8">
+      <div className="flex flex-wrap items-start justify-between gap-4">
+        <div className="min-w-0 flex-1">
+          <div className="text-[10px] font-semibold uppercase tracking-wider text-zinc-500">Dashboard</div>
+          <h1 className="mt-1 text-3xl font-bold tracking-tight text-zinc-900 sm:text-4xl">{greeting()}, {userFirstName}.</h1>
+          <p className="mt-2 max-w-2xl text-sm text-zinc-600">{summary}</p>
+          <div className="mt-4 flex flex-wrap gap-2">
+            <Link
+              href="/app/approvals"
+              className="rounded-full border border-white/50 bg-white/70 px-4 py-2 text-xs font-medium text-zinc-900 backdrop-blur-xl transition-colors hover:bg-white/95"
+            >
+              Review approvals
+            </Link>
+            <Link
+              href="/app/activity"
+              className="rounded-full border border-white/50 bg-white/70 px-4 py-2 text-xs font-medium text-zinc-900 backdrop-blur-xl transition-colors hover:bg-white/95"
+            >
+              Open audit log
+            </Link>
+          </div>
+        </div>
+      </div>
+
+      <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-5">
+        {tiles.map((t) => (
+          <div
+            key={t.label}
+            className="rounded-3xl border border-white/50 bg-white/65 p-6 shadow-[0_2px_12px_rgba(0,0,0,0.05),inset_0_1px_0_rgba(255,255,255,0.8)] backdrop-blur-xl transition-all hover:bg-white/80 hover:shadow-[0_8px_24px_rgba(0,0,0,0.08),inset_0_1px_0_rgba(255,255,255,0.9)]"
+          >
+            <div className="inline-flex h-10 w-10 items-center justify-center rounded-2xl border border-white/60 bg-white/70 text-zinc-700 shadow-[inset_0_1px_0_rgba(255,255,255,0.9)]">
+              {t.icon}
             </div>
-          </section>
-        ) : (
-          <section className="card card-lift p-6 sm:p-8 relative overflow-hidden">
-            <div className="absolute -top-24 -right-16 h-72 w-72 rounded-full bg-[color:var(--brand-soft)] blur-3xl opacity-70" />
-            <div className="relative flex items-start justify-between gap-6 flex-wrap">
-              <div className="max-w-2xl">
-                <div className="section-eyebrow"><span className="dot pulse-dot" />Morning brief</div>
-                <h2 className="hero-h1 mt-3 text-[28px] sm:text-[34px]">
-                  {approvals.length === 0
-                    ? "Your fleet is steady. Nothing wants your attention."
-                    : `${approvals.length} ${approvals.length === 1 ? "approval" : "approvals"} want a glance.`}
-                </h2>
-                <p className="mt-3 text-[15px] text-[color:var(--fg-muted)] leading-relaxed">
-                  {running} of {agents.length} agents online. Helmstack handled the rest while you were away.
-                </p>
-                <div className="mt-5 flex flex-wrap gap-2">
-                  {approvals.length > 0 && (
-                    <Link href="/app/approvals" className="btn btn-primary h-9 px-3.5 text-[13px]">Review approvals</Link>
-                  )}
-                  <Link href="/app/activity" className="btn btn-secondary h-9 px-3.5 text-[13px]">See full audit log</Link>
-                </div>
-              </div>
-              <div className="card p-4 w-full sm:w-[280px]">
-                <div className="text-[10.5px] uppercase tracking-[0.18em] text-[color:var(--fg-subtle)] font-medium">Health</div>
-                <div className="mt-3 space-y-2.5 text-[12.5px]">
-                  <Row label="Agents online" value={`${running} / ${agents.length}`} good={running === agents.length} />
-                  <Row label="P0 incidents" value={String(approvals.filter((a) => a.priority === "P0").length)} good={approvals.filter((a) => a.priority === "P0").length === 0} />
-                  <Row label="Errors today" value={String(agents.filter((a) => a.status === "error").length)} good={agents.filter((a) => a.status === "error").length === 0} />
-                  <Row label="Workspace" value={workspace.slug} mono />
-                </div>
-              </div>
-            </div>
-          </section>
-        )}
+            <div className={`mt-5 text-[34px] font-semibold leading-none tracking-tight ${t.accent}`}>{t.value}</div>
+            <div className="mt-2 text-xs text-zinc-500">{t.label}</div>
+          </div>
+        ))}
+      </div>
 
-        {!isEmpty && (
-          <>
-            <section className="grid grid-cols-2 lg:grid-cols-4 gap-4">
-              <Kpi label="Running" value={running} sub={`of ${agents.length}`} tone="good" />
-              <Kpi label="Needs review" value={approvals.length} sub={approvals.length === 0 ? "all caught up" : `${approvals.filter((a) => a.priority === "P0").length} P0 waiting`} tone={approvals.length === 0 ? undefined : "warn"} />
-              <Kpi label="Today's tasks" value={todayTasks} sub="92% unattended" />
-              <Kpi label="Spend today" value="$12.40" sub="−18% vs avg" />
-            </section>
-
-            <section className="grid grid-cols-1 lg:grid-cols-[1.4fr_1fr] gap-4">
-              <div className="card p-6">
-                <div className="flex items-center justify-between mb-5">
-                  <h3 className="text-[15px] font-semibold tracking-tight">Needs review</h3>
-                  <Link href="/app/approvals" className="text-[12px] text-[color:var(--fg-muted)] hover:text-[color:var(--fg)]">All approvals →</Link>
-                </div>
-                {approvals.length === 0 ? (
-                  <p className="text-[13px] text-[color:var(--fg-muted)]">Nothing pending. Helmstack will ping you when something lands.</p>
-                ) : (
-                  <div className="space-y-2.5">
-                    {approvals.slice(0, 3).map((a) => (
-                      <div key={a.id} className="rounded-xl border border-[color:var(--border)] bg-[color:var(--bg-soft)]/40 p-4">
-                        <div className="flex items-start justify-between gap-3">
-                          <div className="min-w-0">
-                            <div className="text-[13.5px] font-medium leading-snug">{a.action}</div>
-                            <div className="text-[11.5px] text-[color:var(--fg-subtle)] mt-0.5">{a.agent?.name ?? "Unknown"} · {relativeTime(a.created_at)}</div>
-                          </div>
-                          <span className={`chip ${a.priority === "P0" ? "chip-brand" : ""}`}>{a.priority}</span>
-                        </div>
-                        {a.context && <div className="text-[12.5px] text-[color:var(--fg-muted)] mt-2 leading-relaxed line-clamp-2">{a.context}</div>}
-                        <div className="mt-3">
-                          <Link href="/app/approvals" className="btn btn-primary h-7 px-2.5 text-[11px]">Open</Link>
-                        </div>
-                      </div>
-                    ))}
-                  </div>
-                )}
-              </div>
-
-              <div className="card p-6">
-                <div className="flex items-center justify-between mb-5">
-                  <h3 className="text-[15px] font-semibold tracking-tight">Live activity</h3>
-                  <span className="chip"><span className="dot text-[color:var(--good)] pulse-dot" />Streaming</span>
-                </div>
-                {activity.length === 0 ? (
-                  <p className="text-[13px] text-[color:var(--fg-muted)]">No activity yet.</p>
-                ) : (
-                  <ol className="space-y-2.5">
-                    {activity.map((ev) => (
-                      <li key={ev.id} className="flex items-start gap-3 text-[12.5px]">
-                        <span className="font-mono text-[11px] text-[color:var(--fg-subtle)] tabular-nums pt-0.5">{new Date(ev.occurred_at).toLocaleTimeString("en-US", { hour: "2-digit", minute: "2-digit", second: "2-digit", hour12: false })}</span>
-                        <span
-                          className={`mt-1.5 h-1.5 w-1.5 rounded-full flex-none ${
-                            ev.kind === "error" ? "bg-[color:var(--danger)]" :
-                            ev.kind === "approval" ? "bg-[color:var(--warn)]" :
-                            ev.kind === "memory" || ev.kind === "schedule" ? "bg-[color:var(--accent)]" :
-                            "bg-[color:var(--good)]"
-                          }`}
-                        />
-                        <span className="min-w-0">
-                          <span className="font-medium">{ev.agent?.name ?? "System"}</span>
-                          <span className="text-[color:var(--fg-muted)]"> · {ev.message}</span>
-                        </span>
-                      </li>
-                    ))}
-                  </ol>
-                )}
-              </div>
-            </section>
-
-            <section className="card p-6">
-              <div className="flex items-center justify-between mb-5">
-                <h3 className="text-[15px] font-semibold tracking-tight">Your fleet</h3>
-                <Link href="/app/agents" className="text-[12px] text-[color:var(--fg-muted)] hover:text-[color:var(--fg)]">All agents →</Link>
-              </div>
-              <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-3">
-                {agents.map((a) => (
-                  <Link
-                    key={a.id}
-                    href={`/app/agents`}
-                    className="rounded-xl border border-[color:var(--border)] bg-[color:var(--bg-soft)]/40 p-4 hover:border-[color:var(--border-strong)] hover:bg-[color:var(--surface)] transition-colors"
-                  >
-                    <div className="flex items-center justify-between">
-                      <div className="flex items-center gap-3 min-w-0">
-                        <span className="h-9 w-9 rounded-xl bg-gradient-to-br from-[color:var(--brand)] to-[color:var(--accent)] grid place-items-center text-[color:var(--on-brand)] font-semibold text-[12px] flex-none">
-                          {a.name.slice(0, 2)}
-                        </span>
-                        <div className="min-w-0">
-                          <div className="text-[13.5px] font-semibold tracking-tight truncate">{a.name}</div>
-                          <div className="text-[10.5px] text-[color:var(--fg-subtle)] uppercase tracking-[0.15em]">{runtimeLabel[a.runtime] ?? a.runtime}</div>
-                        </div>
-                      </div>
-                      <span className={`chip flex-none ${
-                        a.status === "running" ? "text-[color:var(--good)]" :
-                        a.status === "needs_review" ? "chip-brand" :
-                        a.status === "error" ? "text-[color:var(--danger)]" : ""
-                      }`}>
-                        <span className="dot" />
-                        {a.status.replace("_", " ")}
+      <div className="grid grid-cols-1 gap-5 lg:grid-cols-2">
+        <section className="rounded-3xl border border-white/50 bg-white/70 p-5 shadow-[0_2px_12px_rgba(0,0,0,0.05),inset_0_1px_0_rgba(255,255,255,0.8)] backdrop-blur-xl">
+          <header className="flex items-baseline justify-between gap-3">
+            <h2 className="text-sm font-semibold text-zinc-900">Needs your review</h2>
+            <Link href="/app/approvals" className="text-xs text-zinc-500 hover:text-zinc-900">See all →</Link>
+          </header>
+          <div className="mt-4 space-y-2">
+            {approvals.length === 0 ? (
+              <div className="rounded-2xl bg-white px-4 py-6 text-center text-xs text-zinc-500">All caught up.</div>
+            ) : (
+              approvals.slice(0, 5).map((a) => (
+                <div
+                  key={a.id}
+                  className="flex items-center justify-between gap-3 rounded-2xl bg-white px-4 py-3 shadow-[inset_0_1px_0_rgba(255,255,255,0.9)]"
+                >
+                  <div className="min-w-0 flex-1">
+                    <div className="flex items-center gap-2">
+                      <span className={`rounded-full border px-2 py-0.5 text-[10px] font-medium uppercase tracking-wider ${a.priority === "P0" ? "bg-red-50 text-red-700 border-red-200" : "bg-amber-50 text-amber-700 border-amber-200"}`}>
+                        {a.priority}
                       </span>
+                      <span className="text-xs font-medium text-zinc-900">{a.agent?.name ?? "—"}</span>
+                      <span className="text-[10px] text-zinc-400">{relativeTime(a.created_at)}</span>
                     </div>
-                    {a.role && <p className="mt-3 text-[12.5px] text-[color:var(--fg-muted)] line-clamp-2 leading-snug">{a.role}</p>}
-                    <div className="mt-3 grid grid-cols-3 gap-2 text-[11px]">
-                      <span><span className="text-[color:var(--fg-subtle)]">Last </span><span className="text-[color:var(--fg)]">{relativeTime(a.last_activity_at)}</span></span>
-                      <span><span className="text-[color:var(--fg-subtle)]">Pending </span><span className="text-[color:var(--fg)]">{a.pending_count}</span></span>
-                      <span><span className="text-[color:var(--fg-subtle)]">Success </span><span className="text-[color:var(--fg)]">{a.success_rate ?? "—"}{a.success_rate ? "%" : ""}</span></span>
-                    </div>
+                    <div className="mt-1 truncate text-sm text-zinc-700">{a.action}</div>
+                  </div>
+                  <Link
+                    href="/app/approvals"
+                    className="shrink-0 rounded-full bg-zinc-900 px-3 py-1.5 text-xs font-medium text-white hover:bg-zinc-700"
+                  >
+                    Review
                   </Link>
-                ))}
-              </div>
-            </section>
-          </>
+                </div>
+              ))
+            )}
+          </div>
+        </section>
+
+        <section className="rounded-3xl border border-white/50 bg-white/70 p-5 shadow-[0_2px_12px_rgba(0,0,0,0.05),inset_0_1px_0_rgba(255,255,255,0.8)] backdrop-blur-xl">
+          <header className="flex items-baseline justify-between gap-3">
+            <h2 className="text-sm font-semibold text-zinc-900">Live activity</h2>
+            <span className="inline-flex items-center gap-1.5 text-xs text-zinc-500">
+              <span className="h-2 w-2 rounded-full bg-emerald-400" />
+              live
+            </span>
+          </header>
+          <div className="mt-4 space-y-2">
+            {activity.length === 0 ? (
+              <div className="rounded-2xl bg-white px-4 py-6 text-center text-xs text-zinc-500">No events yet.</div>
+            ) : (
+              activity.map((ev) => (
+                <div key={ev.id} className="flex items-start gap-3 rounded-2xl bg-white px-4 py-2.5 shadow-[inset_0_1px_0_rgba(255,255,255,0.9)]">
+                  <span className="font-mono text-[10px] text-zinc-400 tabular-nums pt-0.5 w-14">
+                    {new Date(ev.occurred_at).toLocaleTimeString("en-US", { hour: "2-digit", minute: "2-digit", second: "2-digit", hour12: false })}
+                  </span>
+                  <span className={`mt-1.5 h-1.5 w-1.5 rounded-full flex-none ${
+                    ev.kind === "error" ? "bg-red-500" :
+                    ev.kind === "approval" ? "bg-amber-500" :
+                    ev.kind === "memory" ? "bg-violet-500" :
+                    ev.kind === "schedule" ? "bg-sky-500" :
+                    "bg-emerald-500"
+                  }`} />
+                  <span className="min-w-0 flex-1 text-xs">
+                    <span className="font-medium text-zinc-900">{ev.agent?.name ?? "System"}</span>
+                    <span className="text-zinc-600"> · {ev.message}</span>
+                  </span>
+                </div>
+              ))
+            )}
+          </div>
+        </section>
+      </div>
+
+      <section>
+        <header className="flex items-baseline justify-between gap-3 mb-3">
+          <h2 className="text-sm font-semibold text-zinc-900">Your fleet</h2>
+          <Link href="/app/agents" className="text-xs text-zinc-500 hover:text-zinc-900">All agents →</Link>
+        </header>
+        {agents.length === 0 ? (
+          <div className="rounded-3xl border border-white/50 bg-white/70 p-10 text-center shadow-[0_2px_12px_rgba(0,0,0,0.05),inset_0_1px_0_rgba(255,255,255,0.8)] backdrop-blur-xl">
+            <h3 className="text-base font-semibold text-zinc-900">No agents yet</h3>
+            <p className="mt-2 text-sm text-zinc-600">Connect a runtime to start.</p>
+          </div>
+        ) : (
+          <div className="flex flex-wrap gap-2.5">
+            {agents.map((a) => {
+              const dot =
+                a.status === "running" ? "bg-emerald-500 animate-pulse" :
+                a.status === "needs_review" ? "bg-amber-500" :
+                a.status === "error" ? "bg-red-500" :
+                "bg-stone-400";
+              const dotLabel =
+                a.status === "running" ? "running" :
+                a.status === "needs_review" ? `${a.pending_count} awaiting` :
+                a.status === "error" ? "error" :
+                "idle";
+              return (
+                <Link
+                  key={a.id}
+                  href="/app/agents"
+                  title={`${a.name} — ${a.role ?? ""}\n${dotLabel}`}
+                  className={`block h-[72px] w-[176px] shrink-0 rounded-2xl border-l-2 bg-white px-4 py-3 transition-all shadow-[0_1px_3px_rgba(0,0,0,0.03)] hover:shadow-[0_6px_18px_rgba(0,0,0,0.07)] ${runtimeBorder[a.runtime] ?? "border-l-stone-300"}`}
+                >
+                  <div className="flex items-center justify-between">
+                    <span className="truncate pr-4 text-sm font-semibold text-zinc-900">{a.name}</span>
+                    <span className={`inline-block h-1.5 w-1.5 shrink-0 rounded-full ${dot}`} aria-label={dotLabel} />
+                  </div>
+                  <div className="mt-1 truncate text-[11px] leading-snug text-zinc-500">{runtimeLabel[a.runtime] ?? a.runtime}</div>
+                  {a.pending_count > 0 && (
+                    <div className="mt-1 text-[10px] font-medium uppercase tracking-wider text-amber-600">
+                      {a.pending_count} awaiting
+                    </div>
+                  )}
+                </Link>
+              );
+            })}
+          </div>
         )}
-      </main>
-    </>
-  );
-}
-
-function Row({ label, value, good, mono }: { label: string; value: string; good?: boolean; mono?: boolean }) {
-  return (
-    <div className="flex items-center justify-between">
-      <span className="text-[color:var(--fg-muted)]">{label}</span>
-      <span className={`${mono ? "font-mono text-[11.5px]" : "font-medium"} ${good ? "text-[color:var(--good)]" : "text-[color:var(--fg)]"}`}>{value}</span>
-    </div>
-  );
-}
-
-function Kpi({ label, value, sub, tone }: { label: string; value: string | number; sub: string; tone?: "good" | "warn" }) {
-  return (
-    <div className="card p-5">
-      <div className="text-[10.5px] uppercase tracking-[0.18em] text-[color:var(--fg-subtle)] font-medium">{label}</div>
-      <div className="mt-1.5 text-[28px] font-semibold tracking-tight">{value}</div>
-      <div className={`mt-1 text-[12px] ${tone === "good" ? "text-[color:var(--good)]" : tone === "warn" ? "text-[color:var(--warn)]" : "text-[color:var(--fg-subtle)]"}`}>{sub}</div>
+      </section>
     </div>
   );
 }

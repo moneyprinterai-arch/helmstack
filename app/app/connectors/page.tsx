@@ -1,18 +1,25 @@
 import { AppTopbar } from "@/components/app-topbar";
 import { getWorkspace, getConnectors } from "@/lib/queries";
 
-const statusStyle: Record<string, string> = {
-  connected: "text-[color:var(--good)]",
-  needs_reauth: "text-[color:var(--warn)]",
-  error: "text-[color:var(--danger)]",
-  not_configured: "text-[color:var(--fg-subtle)]",
+const STATUS_PILL: Record<string, string> = {
+  connected: "bg-emerald-50 text-emerald-700 border-emerald-200",
+  needs_reauth: "bg-amber-50 text-amber-700 border-amber-200",
+  error: "bg-red-50 text-red-700 border-red-200",
+  not_configured: "bg-stone-100 text-stone-600 border-stone-200",
 };
 
-const statusLabel: Record<string, string> = {
+const STATUS_LABEL: Record<string, string> = {
   connected: "Connected",
-  needs_reauth: "Reauth needed",
+  needs_reauth: "Needs reauth",
   error: "Error",
-  not_configured: "Not connected",
+  not_configured: "Not configured",
+};
+
+const STATUS_DOT: Record<string, string> = {
+  connected: "bg-emerald-500",
+  needs_reauth: "bg-amber-500",
+  error: "bg-red-500",
+  not_configured: "bg-stone-400",
 };
 
 export default async function ConnectorsPage() {
@@ -21,62 +28,71 @@ export default async function ConnectorsPage() {
   const groups = Array.from(new Set(connectors.map((c) => c.category)));
 
   return (
-    <>
-      <AppTopbar title="Connectors" eyebrow="Integrations" />
-      <main className="px-6 lg:px-10 py-8 space-y-8 max-w-[1320px]">
-        <div className="card p-5 flex items-start gap-4">
-          <span className="h-10 w-10 grid place-items-center rounded-xl bg-[color:var(--brand-soft)] text-[color:var(--brand)] flex-none">
-            <svg viewBox="0 0 24 24" className="h-5 w-5" fill="none" stroke="currentColor" strokeWidth="1.6"><path d="M9 12h6 M6 12a3 3 0 110-6 3 3 0 010 6z M18 18a3 3 0 110-6 3 3 0 010 6z" /></svg>
-          </span>
-          <div className="flex-1">
-            <div className="text-[13.5px] font-semibold tracking-tight">OAuth once, scope per-agent</div>
-            <p className="text-[12.5px] text-[color:var(--fg-muted)] mt-1 leading-relaxed">
-              Helmstack mints scoped tokens for each agent that uses a connector. Rotating credentials, paginating, and rate-limit backoff happen for you.
-            </p>
-          </div>
-          <button type="button" className="btn btn-primary h-8 px-3 text-[12px]">Add connector</button>
-        </div>
+    <div className="mx-auto max-w-[1320px] space-y-7 px-5 py-6 sm:px-8 sm:py-8">
+      <AppTopbar
+        title="Connectors"
+        eyebrow="Integrations"
+        action={
+          <button
+            type="button"
+            className="rounded-full bg-zinc-900 px-4 py-2 text-xs font-medium text-white shadow-[0_4px_14px_rgba(0,0,0,0.10)] hover:bg-zinc-700"
+          >
+            Add connector
+          </button>
+        }
+      />
 
-        {connectors.length === 0 ? (
-          <div className="card p-10 text-center">
-            <h3 className="text-[16px] font-semibold tracking-tight">No connectors yet</h3>
-            <p className="mt-2 text-[13px] text-[color:var(--fg-muted)] max-w-md mx-auto">
-              Connect Notion, Slack, GitHub, Stripe, and more — your agents inherit the access.
-            </p>
-          </div>
-        ) : (
-          groups.map((g) => (
-            <section key={g}>
-              <div className="text-[11px] uppercase tracking-[0.18em] text-[color:var(--fg-subtle)] font-medium mb-3">{g}</div>
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
-                {connectors.filter((c) => c.category === g).map((c) => (
-                  <div key={c.id} className="card p-5 flex items-start gap-4">
-                    <span className="h-10 w-10 rounded-xl bg-gradient-to-br from-[color:var(--brand-soft)] to-[color:var(--surface-alt)] border border-[color:var(--border)] grid place-items-center text-[12px] font-semibold text-[color:var(--brand)] flex-none">
-                      {c.display_name.slice(0, 2).toUpperCase()}
-                    </span>
-                    <div className="min-w-0 flex-1">
-                      <div className="flex items-center justify-between gap-2">
-                        <div className="text-[13.5px] font-semibold tracking-tight truncate">{c.display_name}</div>
-                        <span className={`text-[11px] font-medium ${statusStyle[c.status]}`}>{statusLabel[c.status]}</span>
-                      </div>
-                      {c.account && <div className="text-[11.5px] text-[color:var(--fg-subtle)] mt-0.5 truncate">{c.account}</div>}
-                      <div className="mt-3 flex items-center justify-end">
-                        {c.status === "not_configured" ? (
-                          <button type="button" className="btn btn-secondary h-7 px-2.5 text-[11px]">Connect</button>
-                        ) : c.status === "needs_reauth" || c.status === "error" ? (
-                          <button type="button" className="btn btn-primary h-7 px-2.5 text-[11px]">Reconnect</button>
-                        ) : (
-                          <button type="button" className="btn btn-ghost h-7 px-2.5 text-[11px]">Manage</button>
-                        )}
-                      </div>
+      {connectors.length === 0 ? (
+        <div className="rounded-3xl border border-white/50 bg-white/70 p-10 text-center shadow-[0_2px_12px_rgba(0,0,0,0.05),inset_0_1px_0_rgba(255,255,255,0.8)] backdrop-blur-xl">
+          <h3 className="text-base font-semibold text-zinc-900">No connectors yet</h3>
+          <p className="mt-2 text-sm text-zinc-600 max-w-md mx-auto">OAuth into Notion, Slack, GitHub, Stripe — your agents inherit the access.</p>
+        </div>
+      ) : (
+        groups.map((g) => (
+          <section key={g}>
+            <div className="text-[10px] font-semibold uppercase tracking-wider text-zinc-500 mb-3">{g}</div>
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
+              {connectors.filter((c) => c.category === g).map((c) => (
+                <div
+                  key={c.id}
+                  className="rounded-3xl border border-stone-200/70 bg-white px-5 py-5 shadow-[0_2px_12px_rgba(0,0,0,0.04),inset_0_1px_0_rgba(255,255,255,0.9)]"
+                >
+                  <header className="flex items-start justify-between gap-3">
+                    <div className="min-w-0">
+                      <h3 className="truncate text-base font-semibold tracking-tight text-zinc-900">{c.display_name}</h3>
+                      {c.account && <div className="mt-0.5 text-xs text-zinc-500 truncate">{c.account}</div>}
                     </div>
-                  </div>
-                ))}
-              </div>
-            </section>
-          ))
-        )}
-      </main>
-    </>
+                    <span className={`inline-flex items-center gap-1.5 rounded-full border px-2 py-0.5 text-[10px] font-medium ${STATUS_PILL[c.status]}`}>
+                      <span className={`h-1.5 w-1.5 rounded-full ${STATUS_DOT[c.status]}`} />
+                      {STATUS_LABEL[c.status]}
+                    </span>
+                  </header>
+                  {(c.status === "needs_reauth" || c.status === "error") && (
+                    <div className="mt-4">
+                      <button
+                        type="button"
+                        className="rounded-full border border-stone-200 bg-stone-50 px-3 py-1 text-[11px] font-medium text-zinc-700 hover:bg-stone-100"
+                      >
+                        Reconnect
+                      </button>
+                    </div>
+                  )}
+                  {c.status === "not_configured" && (
+                    <div className="mt-4">
+                      <button
+                        type="button"
+                        className="rounded-full bg-zinc-900 px-3 py-1 text-[11px] font-medium text-white hover:bg-zinc-700"
+                      >
+                        Connect
+                      </button>
+                    </div>
+                  )}
+                </div>
+              ))}
+            </div>
+          </section>
+        ))
+      )}
+    </div>
   );
 }

@@ -7,52 +7,73 @@ export default async function ApprovalsPage() {
   const approvals = workspace ? await getPendingApprovals(workspace.id) : [];
 
   return (
-    <>
+    <div className="mx-auto max-w-[960px] space-y-7 px-5 py-6 sm:px-8 sm:py-8">
       <AppTopbar title="Approvals" eyebrow={`${approvals.length} pending`} />
-      <main className="px-6 lg:px-10 py-8 space-y-5 max-w-[960px]">
-        {approvals.length === 0 ? (
-          <div className="card p-10 text-center">
-            <h3 className="text-[16px] font-semibold tracking-tight">All clear</h3>
-            <p className="mt-2 text-[13px] text-[color:var(--fg-muted)]">Nothing wants your attention. Helmstack will ping you when the next one lands.</p>
-          </div>
-        ) : (
-          approvals.map((a) => (
-            <form key={a.id} action={resolveApproval} className="card p-6">
-              <input type="hidden" name="id" value={a.id} />
-              <div className="flex items-start justify-between gap-4 flex-wrap">
-                <div className="min-w-0 flex-1">
-                  <div className="flex items-center gap-2 text-[11.5px] text-[color:var(--fg-subtle)]">
-                    <span className="font-medium text-[color:var(--fg-muted)]">{a.agent?.name ?? "Unknown"}</span>
-                    <span>·</span>
-                    <span>{relativeTime(a.created_at)}</span>
-                    <span className={`chip ${a.priority === "P0" ? "chip-brand" : ""}`}>{a.priority}</span>
-                  </div>
-                  <h3 className="mt-2 text-[16px] font-semibold tracking-tight">{a.action}</h3>
-                  {a.context && <p className="mt-2 text-[13.5px] text-[color:var(--fg-muted)] leading-relaxed">{a.context}</p>}
-                </div>
-              </div>
 
-              <div className="mt-5 rounded-xl bg-[color:var(--bg-soft)]/70 border border-[color:var(--border)] p-4">
-                <div className="text-[10.5px] uppercase tracking-[0.18em] text-[color:var(--fg-subtle)] font-medium">Reply note (optional)</div>
+      {approvals.length === 0 ? (
+        <div className="rounded-3xl border border-white/50 bg-white/70 p-10 text-center shadow-[0_2px_12px_rgba(0,0,0,0.05),inset_0_1px_0_rgba(255,255,255,0.8)] backdrop-blur-xl">
+          <h3 className="text-base font-semibold text-zinc-900">All caught up</h3>
+          <p className="mt-2 text-sm text-zinc-600">Nothing pending. Helmstack will ping you when something lands.</p>
+        </div>
+      ) : (
+        <div className="space-y-3">
+          {approvals.map((a) => (
+            <form
+              key={a.id}
+              action={resolveApproval}
+              className="rounded-3xl border border-white/50 bg-white/70 p-5 shadow-[0_2px_12px_rgba(0,0,0,0.05),inset_0_1px_0_rgba(255,255,255,0.8)] backdrop-blur-xl"
+            >
+              <input type="hidden" name="id" value={a.id} />
+              <div className="flex items-baseline justify-between gap-2">
+                <div className="flex items-center gap-2">
+                  <span className={`rounded-full border px-2 py-0.5 text-[10px] font-medium uppercase tracking-wider ${
+                    a.priority === "P0" ? "bg-red-50 text-red-700 border-red-200" : "bg-amber-50 text-amber-700 border-amber-200"
+                  }`}>
+                    {a.priority}
+                  </span>
+                  <span className="text-xs font-medium text-zinc-900">{a.agent?.name ?? "Unknown"}</span>
+                </div>
+                <span className="text-[10px] text-zinc-500">{relativeTime(a.created_at)}</span>
+              </div>
+              <h3 className="mt-3 text-base font-semibold tracking-tight text-zinc-900">{a.action}</h3>
+              {a.context && (
+                <div className="mt-2 rounded-xl border border-stone-200 bg-stone-50/80 p-3 text-xs text-zinc-700 leading-relaxed">
+                  {a.context}
+                </div>
+              )}
+
+              <div className="mt-4">
+                <div className="text-[10px] font-semibold uppercase tracking-wider text-zinc-500">Reply note (optional)</div>
                 <textarea
                   name="note"
-                  placeholder="Add context, conditions, or a redirect — gets passed back to the agent."
                   rows={2}
-                  className="mt-2 w-full bg-transparent text-[13px] outline-none resize-none text-[color:var(--fg)] placeholder:text-[color:var(--fg-subtle)]"
+                  placeholder="Add context, conditions, or a redirect — gets passed back to the agent."
+                  className="mt-1.5 w-full resize-none rounded-2xl border border-stone-200 bg-white px-3 py-2 text-sm outline-none placeholder:text-zinc-400 focus:border-zinc-400"
                 />
               </div>
 
               <div className="mt-4 flex flex-wrap items-center gap-2">
-                <button type="submit" name="decision" value="approved" className="btn btn-primary h-9 px-4 text-[13px]">
-                  <svg viewBox="0 0 16 16" className="h-3.5 w-3.5" fill="none" stroke="currentColor" strokeWidth="2.2"><path d="M3 8l3 3 7-7" strokeLinecap="round" strokeLinejoin="round" /></svg>
-                  Approve
+                <button
+                  type="submit"
+                  name="decision"
+                  value="approved"
+                  className="rounded-full border border-emerald-200 bg-emerald-50 px-3 py-1.5 text-xs font-medium text-emerald-700 hover:bg-emerald-100"
+                >
+                  Mark resolved
                 </button>
-                <button type="submit" name="decision" value="rejected" className="btn btn-ghost h-9 px-4 text-[13px]">Reject</button>
+                <button
+                  type="submit"
+                  name="decision"
+                  value="rejected"
+                  className="rounded-full border border-stone-200 bg-white px-3 py-1.5 text-xs font-medium text-zinc-700 hover:bg-stone-50"
+                >
+                  Reject
+                </button>
               </div>
             </form>
-          ))
-        )}
-      </main>
-    </>
+          ))}
+        </div>
+      )}
+    </div>
   );
 }

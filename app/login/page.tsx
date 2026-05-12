@@ -15,34 +15,34 @@ export default async function LoginPage({
 }) {
   const { next } = await searchParams;
   return (
-    <>
-      <div className="mesh-bg" aria-hidden />
-      <main className="min-h-screen grid place-items-center px-5 py-12">
-        <div className="w-full max-w-[420px]">
-          <div className="flex justify-center mb-8">
-            <Logo />
-          </div>
-          <div className="card card-lift p-8">
-            <h1 className="text-[26px] font-semibold tracking-tight">Welcome back</h1>
-            <p className="mt-1 text-[14px] text-[color:var(--fg-muted)]">Sign in to take the helm.</p>
+    <main className="min-h-screen grid place-items-center px-5 py-12">
+      <div className="w-full max-w-[420px]">
+        <div className="flex justify-center mb-8">
+          <Logo />
+        </div>
+        <div className="rounded-3xl border border-white/50 bg-white/70 p-8 shadow-[0_8px_32px_rgba(0,0,0,0.06),inset_0_1px_0_rgba(255,255,255,0.9)] backdrop-blur-xl">
+          <h1 className="text-2xl font-bold tracking-tight text-zinc-900">Welcome back</h1>
+          <p className="mt-1 text-sm text-zinc-600">Sign in to take the helm.</p>
 
-            <div className="mt-7">
-              <AuthForm mode="signin" next={next} />
-            </div>
-
-            <p className="mt-6 text-center text-[13px] text-[color:var(--fg-muted)]">
-              New here?{" "}
-              <Link href="/signup" className="text-[color:var(--brand)] font-medium hover:underline">
-                Create an account
-              </Link>
-            </p>
+          <div className="mt-7">
+            <AuthForm mode="signin" next={next} />
           </div>
 
-          <p className="mt-6 text-center text-[11px] text-[color:var(--fg-subtle)]">
-            By continuing you agree to our <Link href="/legal/terms" className="underline-offset-2 hover:underline">Terms</Link> and <Link href="/legal/privacy" className="underline-offset-2 hover:underline">Privacy</Link>.
+          <p className="mt-6 text-center text-xs text-zinc-600">
+            New here?{" "}
+            <Link href="/signup" className="font-medium text-zinc-900 hover:underline underline-offset-2">
+              Create an account
+            </Link>
           </p>
         </div>
-      </main>
-    </>
+
+        <p className="mt-6 text-center text-[11px] text-zinc-500">
+          By continuing you agree to our{" "}
+          <Link href="/legal/terms" className="hover:underline underline-offset-2">Terms</Link>{" "}
+          and{" "}
+          <Link href="/legal/privacy" className="hover:underline underline-offset-2">Privacy</Link>.
+        </p>
+      </div>
+    </main>
   );
 }
