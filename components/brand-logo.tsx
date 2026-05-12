@@ -1,7 +1,7 @@
-import { metaFor, logoUrl, type IntegrationMeta } from "@/lib/integrations";
+import { metaFor, type IntegrationMeta } from "@/lib/integrations";
 
 type Props = {
-  // Pass either a known provider key (notion / drive / qb / …) or a display name.
+  // Pass either a known provider key (notion / drive / qb / …) or pre-resolved meta.
   provider?: string | null;
   meta?: IntegrationMeta;
   fallback?: string;
@@ -14,17 +14,16 @@ export function BrandLogo({ provider, meta, fallback, size = 18, className = "" 
   if (m) {
     return (
       <img
-        src={logoUrl(m, size * 2)}
+        src={m.src}
         alt={m.name}
         width={size}
         height={size}
         loading="lazy"
         className={className}
-        style={{ width: size, height: size }}
+        style={{ width: size, height: size, objectFit: "contain" }}
       />
     );
   }
-  // Fallback to two-letter chip when we don't recognize the provider.
   const initials = (fallback ?? provider ?? "??").slice(0, 2).toUpperCase();
   return (
     <span

@@ -18,7 +18,10 @@ export function Hero() {
           <h1 className="mt-8 text-[44px] sm:text-[68px] lg:text-[78px] font-bold tracking-tight text-zinc-900 leading-[0.98]">
             The control deck for
             <br />
-            your <span className="text-zinc-500">AI agent fleet</span>
+            your{" "}
+            <span className="bg-gradient-to-br from-zinc-900 via-violet-500 to-orange-400 bg-clip-text text-transparent">
+              AI agent fleet
+            </span>
           </h1>
 
           <p className="mt-7 text-[17px] sm:text-[18px] text-zinc-600 leading-relaxed max-w-2xl">
