@@ -1,5 +1,6 @@
 import { AppTopbar } from "@/components/app-topbar";
 import { getWorkspace, getConnectors } from "@/lib/queries";
+import { BrandLogo } from "@/components/brand-logo";
 
 const STATUS_PILL: Record<string, string> = {
   connected: "bg-emerald-50 text-emerald-700 border-emerald-200",
@@ -57,15 +58,22 @@ export default async function ConnectorsPage() {
                   key={c.id}
                   className="rounded-3xl border border-stone-200/70 bg-white px-5 py-5 shadow-[0_2px_12px_rgba(0,0,0,0.04),inset_0_1px_0_rgba(255,255,255,0.9)]"
                 >
-                  <header className="flex items-start justify-between gap-3">
-                    <div className="min-w-0">
-                      <h3 className="truncate text-base font-semibold tracking-tight text-zinc-900">{c.display_name}</h3>
-                      {c.account && <div className="mt-0.5 text-xs text-zinc-500 truncate">{c.account}</div>}
-                    </div>
-                    <span className={`inline-flex items-center gap-1.5 rounded-full border px-2 py-0.5 text-[10px] font-medium ${STATUS_PILL[c.status]}`}>
-                      <span className={`h-1.5 w-1.5 rounded-full ${STATUS_DOT[c.status]}`} />
-                      {STATUS_LABEL[c.status]}
+                  <header className="flex items-start gap-3">
+                    <span className="grid h-10 w-10 flex-none place-items-center rounded-2xl border border-stone-200 bg-white shadow-[inset_0_1px_0_rgba(255,255,255,0.9)]">
+                      <BrandLogo provider={c.provider} fallback={c.display_name} size={22} />
                     </span>
+                    <div className="min-w-0 flex-1">
+                      <div className="flex items-start justify-between gap-2">
+                        <div className="min-w-0">
+                          <h3 className="truncate text-base font-semibold tracking-tight text-zinc-900">{c.display_name}</h3>
+                          {c.account && <div className="mt-0.5 text-xs text-zinc-500 truncate">{c.account}</div>}
+                        </div>
+                        <span className={`inline-flex shrink-0 items-center gap-1.5 rounded-full border px-2 py-0.5 text-[10px] font-medium ${STATUS_PILL[c.status]}`}>
+                          <span className={`h-1.5 w-1.5 rounded-full ${STATUS_DOT[c.status]}`} />
+                          {STATUS_LABEL[c.status]}
+                        </span>
+                      </div>
+                    </div>
                   </header>
                   {(c.status === "needs_reauth" || c.status === "error") && (
                     <div className="mt-4">
