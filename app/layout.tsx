@@ -8,11 +8,11 @@ export const metadata: Metadata = {
   },
   description:
     "Connect any agent runtime, observe what they're doing, approve what matters, and ship outcomes. Helmstack is the operations layer for production agent fleets.",
-  metadataBase: new URL("https://helmstack.vercel.app"),
+  metadataBase: new URL("https://helmstack.io"),
   openGraph: {
     title: "Helmstack",
     description: "The control deck for your AI agent fleet. One place to run, observe, and govern every agent.",
-    url: "https://helmstack.vercel.app",
+    url: "https://helmstack.io",
     siteName: "Helmstack",
     type: "website",
   },

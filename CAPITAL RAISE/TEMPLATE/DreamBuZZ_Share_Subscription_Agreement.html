@@ -1,0 +1,1005 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>DreamBuZZ — Seed Round Share Subscription Agreement</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --navy: #1a2744;
+    --navy-dark: #111827;
+    --navy-mid: #1f3151;
+    --gold: #d4a574;
+    --gold-light: #e8c9a8;
+    --gold-dark: #b8956a;
+    --cream: #faf9f7;
+    --cream-dark: #f0ede8;
+    --white: #ffffff;
+    --text-dark: #1a1a1a;
+    --text-muted: #64748b;
+    --border: rgba(26,39,68,0.10);
+    --border-gold: rgba(212,165,116,0.25);
+    --red: #c0392b;
+    --green: #27ae60;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    background: var(--cream-dark);
+    color: var(--text-dark);
+    font-size: 14px;
+    line-height: 1.65;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* ── Print ── */
+  @media print {
+    body { background: white; }
+    .no-print { display: none !important; }
+    .page { box-shadow: none !important; margin: 0 !important; border-radius: 0 !important; }
+    .page-break { page-break-after: always; }
+    @page { size: A4 portrait; margin: 12mm 14mm; }
+    input, textarea, select {
+      border: none !important;
+      background: transparent !important;
+      box-shadow: none !important;
+      padding: 0 !important;
+      font-weight: 600 !important;
+    }
+    input[type="number"]::-webkit-inner-spin-button { display: none; }
+    .field-group label::after { content: ''; }
+  }
+
+  /* ── Layout ── */
+  .container {
+    max-width: 820px;
+    margin: 0 auto;
+    padding: 24px 16px 120px;
+  }
+
+  .page {
+    background: var(--white);
+    border-radius: 6px;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.06), 0 8px 30px rgba(0,0,0,0.04);
+    margin-bottom: 28px;
+    overflow: hidden;
+  }
+
+  .page-inner {
+    padding: 40px 48px;
+  }
+
+  /* ── Gold confidential strip ── */
+  .gold-strip {
+    background: linear-gradient(90deg, var(--gold-dark), var(--gold), var(--gold-light));
+    padding: 7px 48px;
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: 2.5px;
+    text-transform: uppercase;
+    color: var(--navy-dark);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  /* ── Header ── */
+  .doc-header {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 32px;
+    padding-bottom: 24px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .logo-mark {
+    width: 44px; height: 44px;
+    background: var(--navy);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+
+  .logo-mark svg { width: 26px; height: 26px; }
+
+  .doc-header h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: 22px;
+    font-weight: 700;
+    color: var(--navy);
+    line-height: 1.2;
+  }
+
+  .doc-header .subtitle {
+    font-size: 11px;
+    color: var(--text-muted);
+    font-weight: 500;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    margin-top: 3px;
+  }
+
+  /* ── Typography ── */
+  h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 17px;
+    font-weight: 700;
+    color: var(--navy);
+    margin: 32px 0 16px;
+    padding-bottom: 8px;
+    border-bottom: 2px solid var(--gold);
+    display: inline-block;
+  }
+
+  h2:first-of-type { margin-top: 0; }
+
+  h3 {
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--navy);
+    margin: 20px 0 8px;
+  }
+
+  p { margin-bottom: 10px; }
+
+  .clause-num {
+    font-weight: 700;
+    color: var(--gold-dark);
+    margin-right: 4px;
+  }
+
+  ul.legal {
+    list-style: none;
+    padding: 0;
+    margin: 10px 0 14px;
+  }
+
+  ul.legal li {
+    padding: 6px 0 6px 22px;
+    position: relative;
+    font-size: 13px;
+    line-height: 1.6;
+  }
+
+  ul.legal li::before {
+    content: '';
+    position: absolute;
+    left: 0; top: 13px;
+    width: 8px; height: 8px;
+    border-radius: 50%;
+    background: var(--gold);
+    opacity: 0.6;
+  }
+
+  .legal-note {
+    background: var(--cream);
+    border-left: 3px solid var(--gold);
+    padding: 14px 18px;
+    font-size: 11.5px;
+    line-height: 1.65;
+    color: #555;
+    border-radius: 0 4px 4px 0;
+    margin: 16px 0;
+  }
+
+  /* ── Info Table (company details) ── */
+  .info-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 14px 0;
+    font-size: 13px;
+  }
+
+  .info-table td {
+    padding: 9px 14px;
+    border-bottom: 1px solid var(--border);
+    vertical-align: top;
+  }
+
+  .info-table td:first-child {
+    font-weight: 600;
+    color: var(--navy);
+    width: 260px;
+    white-space: nowrap;
+  }
+
+  .info-table tr:last-child td { border-bottom: none; }
+
+  .info-table tr:nth-child(odd) td { background: rgba(212,165,116,0.04); }
+
+  /* ── Bank details card ── */
+  .bank-card {
+    background: var(--navy);
+    color: var(--white);
+    border-radius: 8px;
+    padding: 24px 28px;
+    margin: 16px 0;
+  }
+
+  .bank-card h3 {
+    color: var(--gold);
+    font-size: 10px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin: 0 0 16px;
+  }
+
+  .bank-row {
+    display: flex;
+    justify-content: space-between;
+    padding: 7px 0;
+    border-bottom: 1px solid rgba(255,255,255,0.08);
+    font-size: 13px;
+  }
+
+  .bank-row:last-child { border-bottom: none; }
+  .bank-row .label { color: rgba(255,255,255,0.5); }
+  .bank-row .value { font-weight: 600; letter-spacing: 0.3px; }
+
+  /* ── Example calcs ── */
+  .example-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 14px;
+    margin: 16px 0;
+  }
+
+  .example-card {
+    background: var(--cream);
+    border-radius: 6px;
+    padding: 18px;
+    text-align: center;
+    border: 1px solid var(--border);
+  }
+
+  .example-card .ex-label {
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    margin-bottom: 8px;
+  }
+
+  .example-card .ex-shares {
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--navy);
+  }
+
+  .example-card .ex-amount {
+    font-size: 13px;
+    color: var(--gold-dark);
+    font-weight: 600;
+    margin-top: 4px;
+  }
+
+  /* ── Form Fields ── */
+  .field-group {
+    margin-bottom: 18px;
+  }
+
+  .field-group label {
+    display: block;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.8px;
+    text-transform: uppercase;
+    color: var(--navy);
+    margin-bottom: 6px;
+  }
+
+  .field-group label .required {
+    color: var(--red);
+    margin-left: 2px;
+  }
+
+  input[type="text"],
+  input[type="email"],
+  input[type="tel"],
+  input[type="number"],
+  input[type="date"],
+  textarea {
+    width: 100%;
+    padding: 11px 14px;
+    border: 1.5px solid var(--border);
+    border-radius: 5px;
+    font-family: 'Inter', sans-serif;
+    font-size: 14px;
+    color: var(--text-dark);
+    background: var(--white);
+    transition: border-color 0.2s, box-shadow 0.2s;
+    outline: none;
+  }
+
+  input:focus, textarea:focus {
+    border-color: var(--gold);
+    box-shadow: 0 0 0 3px rgba(212,165,116,0.15);
+  }
+
+  input::placeholder, textarea::placeholder {
+    color: #b0b8c4;
+    font-style: italic;
+  }
+
+  textarea { resize: vertical; min-height: 60px; }
+
+  .field-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+  }
+
+  /* ── Subscription Calculator ── */
+  .calc-section {
+    background: linear-gradient(135deg, var(--navy-dark), var(--navy));
+    border-radius: 10px;
+    padding: 32px;
+    margin: 20px 0;
+    color: var(--white);
+  }
+
+  .calc-section h3 {
+    color: var(--gold);
+    font-family: 'Playfair Display', serif;
+    font-size: 16px;
+    margin: 0 0 6px;
+  }
+
+  .calc-subtitle {
+    font-size: 12px;
+    color: rgba(255,255,255,0.5);
+    margin-bottom: 24px;
+  }
+
+  .calc-grid {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr auto 1fr;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .calc-box {
+    background: rgba(255,255,255,0.06);
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 8px;
+    padding: 16px;
+    text-align: center;
+  }
+
+  .calc-box .calc-label {
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.4);
+    margin-bottom: 8px;
+  }
+
+  .calc-box input {
+    background: rgba(255,255,255,0.08);
+    border: 1.5px solid rgba(212,165,116,0.3);
+    color: var(--white);
+    text-align: center;
+    font-size: 20px;
+    font-weight: 700;
+    padding: 10px;
+    border-radius: 6px;
+    width: 100%;
+  }
+
+  .calc-box input:focus {
+    border-color: var(--gold);
+    box-shadow: 0 0 0 3px rgba(212,165,116,0.2);
+  }
+
+  .calc-box input::placeholder { color: rgba(255,255,255,0.2); }
+
+  .calc-fixed {
+    font-size: 22px;
+    font-weight: 700;
+    color: var(--white);
+  }
+
+  .calc-fixed .currency { font-size: 13px; color: var(--gold); margin-right: 2px; }
+
+  .calc-operator {
+    font-size: 22px;
+    font-weight: 300;
+    color: rgba(255,255,255,0.3);
+    text-align: center;
+  }
+
+  .calc-result {
+    background: linear-gradient(135deg, rgba(212,165,116,0.15), rgba(212,165,116,0.05));
+    border: 1.5px solid rgba(212,165,116,0.3);
+    border-radius: 8px;
+    padding: 16px;
+    text-align: center;
+  }
+
+  .calc-result .calc-label { color: var(--gold); }
+
+  .calc-result-value {
+    font-size: 26px;
+    font-weight: 700;
+    color: var(--gold-light);
+    letter-spacing: -0.5px;
+  }
+
+  .calc-ownership {
+    margin-top: 18px;
+    text-align: center;
+    font-size: 12px;
+    color: rgba(255,255,255,0.45);
+  }
+
+  .calc-ownership span {
+    color: var(--gold);
+    font-weight: 700;
+    font-size: 14px;
+  }
+
+  /* ── Signature Block ── */
+  .sig-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 40px;
+    margin: 24px 0;
+  }
+
+  .sig-block {
+    border: 1.5px solid var(--border);
+    border-radius: 8px;
+    padding: 28px;
+  }
+
+  .sig-block h4 {
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--gold-dark);
+    margin-bottom: 20px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .sig-line {
+    border-bottom: 1.5px solid var(--navy);
+    height: 48px;
+    margin-bottom: 6px;
+    position: relative;
+  }
+
+  .sig-line-label {
+    font-size: 10px;
+    color: var(--text-muted);
+    margin-bottom: 14px;
+  }
+
+  .sig-prefilled {
+    font-weight: 600;
+    font-size: 13px;
+    color: var(--navy);
+    margin-bottom: 14px;
+  }
+
+  /* ── Sticky bottom bar ── */
+  .bottom-bar {
+    position: fixed;
+    bottom: 0; left: 0; right: 0;
+    background: var(--navy);
+    color: var(--white);
+    padding: 14px 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 24px;
+    box-shadow: 0 -4px 20px rgba(0,0,0,0.15);
+    z-index: 100;
+  }
+
+  .bottom-bar .summary-item {
+    text-align: center;
+  }
+
+  .bottom-bar .summary-label {
+    font-size: 9px;
+    font-weight: 600;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.4);
+  }
+
+  .bottom-bar .summary-value {
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--gold);
+  }
+
+  .bottom-bar .divider {
+    width: 1px;
+    height: 36px;
+    background: rgba(255,255,255,0.1);
+  }
+
+  .btn-print {
+    background: var(--gold);
+    color: var(--navy-dark);
+    border: none;
+    padding: 10px 28px;
+    border-radius: 5px;
+    font-family: 'Inter', sans-serif;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: background 0.2s;
+  }
+
+  .btn-print:hover { background: var(--gold-light); }
+
+  /* ── Checklist ── */
+  .checklist {
+    margin: 14px 0;
+  }
+
+  .check-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    padding: 8px 0;
+  }
+
+  .check-item input[type="checkbox"] {
+    width: 18px; height: 18px;
+    margin-top: 1px;
+    accent-color: var(--gold-dark);
+    cursor: pointer;
+    flex-shrink: 0;
+  }
+
+  .check-item span {
+    font-size: 13px;
+    line-height: 1.55;
+  }
+
+  /* ── Page divider ── */
+  .section-divider {
+    height: 3px;
+    background: linear-gradient(90deg, var(--gold), transparent);
+    margin: 28px 0;
+    border-radius: 2px;
+    opacity: 0.3;
+  }
+
+  /* ── Responsive ── */
+  @media (max-width: 640px) {
+    .page-inner { padding: 24px 20px; }
+    .gold-strip { padding: 7px 20px; }
+    .field-row { grid-template-columns: 1fr; }
+    .sig-grid { grid-template-columns: 1fr; gap: 20px; }
+    .example-grid { grid-template-columns: 1fr; }
+    .calc-grid { grid-template-columns: 1fr; }
+    .calc-operator { display: none; }
+    .bottom-bar { flex-wrap: wrap; gap: 12px; padding: 12px 16px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="container">
+
+  <!-- ════════════════════════════════════════════ PAGE 1 — COVER + DETAILS ═══ -->
+  <div class="page page-break">
+    <div class="gold-strip">
+      <span>Confidential — For Investor Use Only</span>
+      <span>Template Date: 19 February 2026</span>
+    </div>
+    <div class="page-inner">
+
+      <div class="doc-header">
+        <div class="logo-mark">
+          <svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="50" cy="50" r="38" stroke="#d4a574" stroke-width="3" fill="none"/>
+            <path d="M50 15 C55 35, 70 40, 85 50 C70 60, 55 65, 50 85 C45 65, 30 60, 15 50 C30 40, 45 35, 50 15Z" fill="#d4a574" opacity="0.25"/>
+            <circle cx="50" cy="50" r="14" fill="#d4a574" opacity="0.5"/>
+            <circle cx="50" cy="50" r="6" fill="#d4a574"/>
+          </svg>
+        </div>
+        <div>
+          <h1>Share Subscription Agreement</h1>
+          <div class="subtitle">DreamBuZZ App Limited — Seed Round</div>
+        </div>
+      </div>
+
+      <div class="legal-note">
+        <strong>Important Notice:</strong> This document is a template for discussion purposes and does not constitute an offer of securities. Any issuance of shares is subject to definitive documentation, required corporate approvals, and compliance with applicable law. Recipients should obtain independent legal, tax, and financial advice.
+      </div>
+
+      <!-- Company Info -->
+      <h2>Company Details</h2>
+      <table class="info-table">
+        <tr><td>Company</td><td>DreamBuZZ App Limited (New Zealand limited company)</td></tr>
+        <tr><td>NZ Company No.</td><td>8665446</td></tr>
+        <tr><td>NZBN</td><td>9429051200466</td></tr>
+        <tr><td>Registered Office</td><td>16 Sunshine Lane, Flat Bush, Auckland 2019, New Zealand</td></tr>
+        <tr><td>Seed Round (indicative)</td><td>AUD 5,000,000 raise at AUD 25,000,000 pre-money (priced equity)</td></tr>
+        <tr><td>Post-Split Share Count</td><td>1,000,000 ordinary shares (before Seed Round)</td></tr>
+        <tr><td>Subscription Price / Share</td><td>AUD 25.00 (indicative)</td></tr>
+      </table>
+
+      <div class="section-divider"></div>
+
+      <!-- ── 1. Parties ── -->
+      <h2>1. Parties</h2>
+      <p>This Share Subscription Agreement (<strong>Agreement</strong>) is entered into between:</p>
+      <table class="info-table">
+        <tr><td>(A) Company</td><td>DreamBuZZ App Limited (NZ Company No. 8665446) (<strong>Company</strong>)</td></tr>
+        <tr><td>(B) Investor</td><td><em>As specified in Schedule 1 below</em></td></tr>
+      </table>
+
+      <!-- ── 2. Background ── -->
+      <h2>2. Background</h2>
+      <ul class="legal">
+        <li>The Company is undertaking a seed financing round to accelerate product development, scale distribution, and establish international growth (<strong>Seed Round</strong>).</li>
+        <li>The Company intends to complete a share split (subdivision) prior to Completion so that the Company will have 1,000,000 ordinary shares on issue pre-investment (<strong>Share Split</strong>).</li>
+        <li>Following the Share Split, the Investor wishes to subscribe for ordinary shares. The Investor may choose the number of shares they wish to subscribe for, and the cash Subscription Amount is calculated as: Subscription Shares × Subscription Price per share.</li>
+      </ul>
+
+      <!-- ── 3. Definitions ── -->
+      <h2>3. Definitions &amp; Interpretation</h2>
+      <table class="info-table">
+        <tr><td>Business Day</td><td>A day other than a Saturday, Sunday or public holiday in Auckland, New Zealand.</td></tr>
+        <tr><td>Completion</td><td>The issue and allotment of the Subscription Shares and receipt of the Subscription Amount.</td></tr>
+        <tr><td>Share Split</td><td>The subdivision of the Company's existing 100 ordinary shares into 1,000,000 ordinary shares (each existing share becomes 10,000 shares) without changing ownership percentages.</td></tr>
+        <tr><td>Subscription Price</td><td>The price per ordinary share, being AUD 25.00 (unless otherwise agreed in Schedule 1).</td></tr>
+        <tr><td>Subscription Shares</td><td>The number of ordinary shares to be issued to the Investor, as specified in Schedule 1.</td></tr>
+        <tr><td>Subscription Amount</td><td>Subscription Shares × Subscription Price (as set out in Schedule 1).</td></tr>
+      </table>
+      <div class="legal-note">References to shares are to ordinary shares of the Company, post Share Split unless stated otherwise.</div>
+
+    </div>
+  </div>
+
+  <!-- ════════════════════════════════════════════ PAGE 2 — CLAUSES 4–8 ═══ -->
+  <div class="page page-break">
+    <div class="gold-strip">
+      <span>Share Subscription Agreement</span>
+      <span>DreamBuZZ App Limited</span>
+    </div>
+    <div class="page-inner">
+
+      <!-- ── 4. Subscription ── -->
+      <h2>4. Subscription</h2>
+      <p><span class="clause-num">4.1</span> <strong>Subscription.</strong> Subject to clause 5, the Investor subscribes for the Subscription Shares and the Company agrees to issue the Subscription Shares on Completion.</p>
+      <p><span class="clause-num">4.2</span> <strong>Subscription Price.</strong> The Subscription Price is AUD 25.00 per share (indicative), unless otherwise agreed in Schedule 1.</p>
+      <p><span class="clause-num">4.3</span> <strong>Subscription Amount.</strong> The Subscription Amount is calculated as: Subscription Shares × Subscription Price, and is payable in cleared funds in accordance with clause 6.</p>
+      <p><span class="clause-num">4.4</span> <strong>Ranking.</strong> The Subscription Shares will rank equally with all other ordinary shares on issue (post Share Split).</p>
+
+      <!-- ── 5. Conditions Precedent ── -->
+      <h2>5. Conditions Precedent</h2>
+      <ul class="legal">
+        <li><strong>Share Split:</strong> the Share Split has been validly approved and completed, and the share register updated to reflect 1,000,000 ordinary shares on issue pre-investment.</li>
+        <li><strong>Approvals:</strong> all necessary corporate approvals and resolutions required for the issue and allotment of the Subscription Shares have been obtained.</li>
+        <li><strong>KYC/AML:</strong> the Investor provides customary KYC/AML and source-of-funds information reasonably required.</li>
+        <li><strong>Definitive investor rights:</strong> entry into any agreed shareholders' agreement / investor rights deed / constitution (if applicable).</li>
+        <li><strong>No illegality:</strong> the Subscription is not prohibited by applicable law in any relevant jurisdiction.</li>
+      </ul>
+
+      <!-- ── 6. Completion ── -->
+      <h2>6. Completion</h2>
+      <p><span class="clause-num">6.1</span> <strong>Completion Date.</strong> Completion will occur on the date agreed in writing between the parties after the conditions in clause 5 are satisfied or waived (where permitted).</p>
+      <p><span class="clause-num">6.2</span> <strong>Payment.</strong> The Investor must pay the Subscription Amount in cleared funds to the Company's nominated bank account:</p>
+
+      <div class="bank-card">
+        <h3>Bank Transfer Details</h3>
+        <div class="bank-row"><span class="label">Bank</span><span class="value">ANZ</span></div>
+        <div class="bank-row"><span class="label">Account Name</span><span class="value">Dreambuzz App Limited</span></div>
+        <div class="bank-row"><span class="label">Account Type</span><span class="value">Transaction</span></div>
+        <div class="bank-row"><span class="label">BSB</span><span class="value">013 128</span></div>
+        <div class="bank-row"><span class="label">Account Number</span><span class="value">8061-15819</span></div>
+        <div class="bank-row"><span class="label">Payment Reference</span><span class="value">DreamBuZZ Seed Subscription — <em>[Your Name]</em></span></div>
+        <div class="bank-row"><span class="label">Currency</span><span class="value">AUD (unless otherwise agreed)</span></div>
+      </div>
+
+      <p><span class="clause-num">6.3</span> <strong>Company deliverables.</strong> On Completion, the Company will issue and allot the Subscription Shares, update the share register, and deliver confirmation of allotment and an updated cap table.</p>
+
+      <!-- ── 7. Investor Representations ── -->
+      <h2>7. Investor Representations &amp; Warranties</h2>
+      <ul class="legal">
+        <li><strong>Authority:</strong> the Investor has full power and authority to enter into this Agreement.</li>
+        <li><strong>Investment decision:</strong> the Investor subscribes as principal for its own account and has made its own independent evaluation.</li>
+        <li><strong>Risk acknowledgement:</strong> early-stage investments are speculative and may result in total loss.</li>
+        <li><strong>Access to information:</strong> the Investor has received the Company's investor materials and had the opportunity to ask questions.</li>
+        <li><strong>Compliance:</strong> the Investor will comply with applicable laws (including securities laws) in its jurisdiction.</li>
+        <li><strong>Sanctions/AML:</strong> funds are lawful; Investor is not subject to sanctions restrictions.</li>
+      </ul>
+
+      <!-- ── 8. Company Representations ── -->
+      <h2>8. Company Representations &amp; Warranties</h2>
+      <ul class="legal">
+        <li><strong>Incorporation:</strong> the Company is duly incorporated and validly existing under New Zealand law.</li>
+        <li><strong>Authority:</strong> the Company has authority to enter into this Agreement and issue the Subscription Shares.</li>
+        <li><strong>Valid issue:</strong> upon receipt of the Subscription Amount, the Subscription Shares will be validly issued and rank equally with other ordinary shares.</li>
+      </ul>
+
+    </div>
+  </div>
+
+  <!-- ════════════════════════════════════════════ PAGE 3 — CLAUSES 9–11 + SCHEDULE 1 ═══ -->
+  <div class="page page-break">
+    <div class="gold-strip">
+      <span>Share Subscription Agreement</span>
+      <span>DreamBuZZ App Limited</span>
+    </div>
+    <div class="page-inner">
+
+      <!-- ── 9. Transfer Restrictions ── -->
+      <h2>9. Transfer Restrictions</h2>
+      <p>The Subscription Shares are restricted and may not be transferred except in accordance with applicable law and any agreed shareholder transfer restrictions.</p>
+
+      <!-- ── 10. Confidentiality ── -->
+      <h2>10. Confidentiality &amp; Non-Reliance</h2>
+      <p>The Investor must keep confidential all non-public Company information received in connection with the Subscription.</p>
+      <p>The Investor acknowledges it is responsible for its own due diligence and has not relied on any representation other than those expressly set out in this Agreement.</p>
+
+      <!-- ── 11. Governing Law ── -->
+      <h2>11. Governing Law &amp; Jurisdiction</h2>
+      <p>This Agreement is governed by the laws of <strong>New Zealand</strong>. The parties submit to the non-exclusive jurisdiction of the courts of New Zealand.</p>
+
+      <div class="section-divider"></div>
+
+      <!-- ════════ SCHEDULE 1 — FILLABLE ════════ -->
+      <h2>Schedule 1 — Subscription Details</h2>
+      <p style="color:var(--text-muted); font-size:12px; margin-bottom:20px;">Please complete all fields marked with <span style="color:var(--red);">*</span></p>
+
+      <div class="field-row">
+        <div class="field-group">
+          <label>Investor Legal Name <span class="required">*</span></label>
+          <input type="text" id="inv-name" placeholder="Full legal name" oninput="updateSummary()">
+        </div>
+        <div class="field-group">
+          <label>Entity Type</label>
+          <input type="text" placeholder="Individual / Company / Trust / etc.">
+        </div>
+      </div>
+
+      <div class="field-group">
+        <label>Investor Address <span class="required">*</span></label>
+        <input type="text" id="inv-address" placeholder="Full registered / residential address">
+      </div>
+
+      <div class="field-row">
+        <div class="field-group">
+          <label>Email <span class="required">*</span></label>
+          <input type="email" id="inv-email" placeholder="investor@example.com">
+        </div>
+        <div class="field-group">
+          <label>Phone</label>
+          <input type="tel" placeholder="+61 ···">
+        </div>
+      </div>
+
+      <!-- ── Calculator ── -->
+      <div class="calc-section">
+        <h3>Subscription Calculator</h3>
+        <p class="calc-subtitle">Enter the number of shares you wish to subscribe for — the total is calculated automatically.</p>
+
+        <div class="calc-grid">
+          <div class="calc-box">
+            <div class="calc-label">Subscription Shares</div>
+            <input type="number" id="calc-shares" min="1" step="1" placeholder="e.g. 10,000" oninput="calculate()">
+          </div>
+          <div class="calc-operator">×</div>
+          <div class="calc-box">
+            <div class="calc-label">Price / Share</div>
+            <div class="calc-fixed"><span class="currency">AUD</span> 25.00</div>
+          </div>
+          <div class="calc-operator">=</div>
+          <div class="calc-result">
+            <div class="calc-label">Total Subscription Amount</div>
+            <div class="calc-result-value" id="calc-total">AUD 0.00</div>
+          </div>
+        </div>
+
+        <div class="calc-ownership">
+          Indicative post-money ownership: <span id="calc-ownership">0.00%</span>
+          <span style="opacity:0.4;">&nbsp;(of 1,000,000 + Seed Round shares)</span>
+        </div>
+      </div>
+
+      <div class="field-row">
+        <div class="field-group">
+          <label>Target Completion Date</label>
+          <input type="date" id="inv-date">
+        </div>
+        <div class="field-group">
+          <label>Payment Reference</label>
+          <input type="text" id="inv-payref" placeholder="Auto-generated" readonly style="background:var(--cream);">
+        </div>
+      </div>
+
+      <h3>Example Calculations</h3>
+      <div class="example-grid">
+        <div class="example-card">
+          <div class="ex-label">Example A</div>
+          <div class="ex-shares">10,000 shares</div>
+          <div class="ex-amount">AUD 250,000</div>
+        </div>
+        <div class="example-card">
+          <div class="ex-label">Example B</div>
+          <div class="ex-shares">20,000 shares</div>
+          <div class="ex-amount">AUD 500,000</div>
+        </div>
+        <div class="example-card">
+          <div class="ex-label">Example C</div>
+          <div class="ex-shares">40,000 shares</div>
+          <div class="ex-amount">AUD 1,000,000</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ════════════════════════════════════════════ PAGE 4 — CONFIRMATIONS + EXECUTION ═══ -->
+  <div class="page">
+    <div class="gold-strip">
+      <span>Share Subscription Agreement</span>
+      <span>DreamBuZZ App Limited</span>
+    </div>
+    <div class="page-inner">
+
+      <!-- ── Investor Confirmations ── -->
+      <h2>Investor Confirmations</h2>
+      <p style="font-size:13px; color:var(--text-muted); margin-bottom:14px;">By signing below, the Investor confirms and acknowledges each of the following:</p>
+
+      <div class="checklist">
+        <div class="check-item">
+          <input type="checkbox" id="c1">
+          <span>I have full legal authority to enter into this Agreement and to subscribe for the Subscription Shares.</span>
+        </div>
+        <div class="check-item">
+          <input type="checkbox" id="c2">
+          <span>I am subscribing as principal for my own account and have made my own independent evaluation of the investment.</span>
+        </div>
+        <div class="check-item">
+          <input type="checkbox" id="c3">
+          <span>I understand that early-stage investments are speculative and may result in total loss of capital.</span>
+        </div>
+        <div class="check-item">
+          <input type="checkbox" id="c4">
+          <span>I have received the Company's investor materials (Information Memorandum, pitch deck) and have had the opportunity to ask questions.</span>
+        </div>
+        <div class="check-item">
+          <input type="checkbox" id="c5">
+          <span>I will comply with applicable laws, including securities laws, in my jurisdiction.</span>
+        </div>
+        <div class="check-item">
+          <input type="checkbox" id="c6">
+          <span>My funds are lawful and I am not subject to any sanctions restrictions.</span>
+        </div>
+        <div class="check-item">
+          <input type="checkbox" id="c7">
+          <span>I agree to keep confidential all non-public Company information received in connection with this Subscription.</span>
+        </div>
+        <div class="check-item">
+          <input type="checkbox" id="c8">
+          <span>I acknowledge that the Subscription Shares are subject to transfer restrictions.</span>
+        </div>
+      </div>
+
+      <div class="section-divider"></div>
+
+      <!-- ── Execution ── -->
+      <h2>Execution</h2>
+      <p>Executed as an agreement.</p>
+
+      <div style="max-width:420px;">
+        <div class="sig-block" style="border-color: var(--gold); background: rgba(212,165,116,0.03);">
+          <h4>Investor</h4>
+          <div class="sig-line"></div>
+          <div class="sig-line-label">Signature</div>
+          <div class="field-group">
+            <label>Name <span class="required">*</span></label>
+            <input type="text" id="sig-name" placeholder="Print full name">
+          </div>
+          <div class="field-group">
+            <label>Title / Capacity</label>
+            <input type="text" placeholder="e.g. Director, Trustee, Individual">
+          </div>
+          <div class="field-group" style="margin-bottom:0;">
+            <label>Date <span class="required">*</span></label>
+            <input type="date">
+          </div>
+        </div>
+      </div>
+
+      <div class="legal-note" style="margin-top:24px;">
+        <strong>Next steps:</strong> (1) Complete all fields in Schedule 1 above. (2) Tick each confirmation box. (3) Print or save as PDF. (4) Sign (wet ink or electronic). (5) Return signed copy to the Company. (6) Transfer the Subscription Amount to the nominated bank account using the payment reference shown.
+      </div>
+
+    </div>
+  </div>
+
+</div>
+
+<!-- ── Sticky Summary Bar ── -->
+<div class="bottom-bar no-print">
+  <div class="summary-item">
+    <div class="summary-label">Investor</div>
+    <div class="summary-value" id="bar-name">—</div>
+  </div>
+  <div class="divider"></div>
+  <div class="summary-item">
+    <div class="summary-label">Shares</div>
+    <div class="summary-value" id="bar-shares">—</div>
+  </div>
+  <div class="divider"></div>
+  <div class="summary-item">
+    <div class="summary-label">Total Amount</div>
+    <div class="summary-value" id="bar-amount">—</div>
+  </div>
+  <div class="divider"></div>
+  <button class="btn-print" onclick="window.print()">⎙ Print / Save PDF</button>
+</div>
+
+<script>
+  const PRICE = 25.00;
+  const PRE_SHARES = 1000000;
+  const TOTAL_RAISE = 200000; // 5M / 25 = 200k shares max
+
+  function formatCurrency(n) {
+    return 'AUD ' + n.toLocaleString('en-AU', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+  }
+
+  function formatNumber(n) {
+    return n.toLocaleString('en-AU');
+  }
+
+  function calculate() {
+    const sharesInput = document.getElementById('calc-shares');
+    const shares = parseInt(sharesInput.value) || 0;
+    const total = shares * PRICE;
+
+    document.getElementById('calc-total').textContent = formatCurrency(total);
+
+    // Indicative ownership (post-money = pre + all seed shares)
+    const postMoney = PRE_SHARES + TOTAL_RAISE;
+    const ownership = shares > 0 ? ((shares / (PRE_SHARES + shares)) * 100) : 0;
+    document.getElementById('calc-ownership').textContent = ownership.toFixed(2) + '%';
+
+    // Update bottom bar
+    document.getElementById('bar-shares').textContent = shares > 0 ? formatNumber(shares) : '—';
+    document.getElementById('bar-amount').textContent = shares > 0 ? formatCurrency(total) : '—';
+
+    // Update payment reference
+    const name = document.getElementById('inv-name').value.trim();
+    if (name) {
+      document.getElementById('inv-payref').value = 'DreamBuZZ Seed Subscription — ' + name;
+    }
+  }
+
+  function updateSummary() {
+    const name = document.getElementById('inv-name').value.trim();
+    document.getElementById('bar-name').textContent = name || '—';
+
+    // Update payment reference
+    if (name) {
+      document.getElementById('inv-payref').value = 'DreamBuZZ Seed Subscription — ' + name;
+    } else {
+      document.getElementById('inv-payref').value = '';
+    }
+  }
+</script>
+
+</body>
+</html>

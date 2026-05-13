@@ -1,0 +1,1540 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DreamBuzz — Investor Pitch Deck</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --navy: #1a2744;
+      --navy-dark: #111827;
+      --navy-mid: #1f3151;
+      --gold: #d4a574;
+      --gold-light: #e8c9a8;
+      --gold-dark: #b8956a;
+      --cream: #faf9f7;
+      --cream-dark: #f3f1ed;
+      --white: #ffffff;
+      --text-dark: #1a1a1a;
+      --text-muted: #64748b;
+      --border-light: rgba(255,255,255,0.08);
+      --border-dark: rgba(0,0,0,0.06);
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      background: #0a0f1a;
+      color: var(--white);
+      line-height: 1.5;
+      font-size: 14px;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .slide {
+      width: 1280px;
+      height: 720px;
+      margin: 0 auto 40px;
+      position: relative;
+      overflow: hidden;
+      page-break-after: always;
+    }
+
+    .slide-dark {
+      background: linear-gradient(180deg, var(--navy-dark) 0%, var(--navy) 100%);
+      color: var(--white);
+    }
+
+    .slide-light {
+      background: var(--cream);
+      color: var(--text-dark);
+    }
+
+    /* Confidential Banner */
+    .confidential {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      background: var(--gold);
+      color: var(--navy-dark);
+      text-align: center;
+      font-size: 9px;
+      font-weight: 600;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      padding: 5px;
+    }
+
+    /* Header */
+    .header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 40px 60px 0;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .logo-mark {
+      width: 32px;
+      height: 32px;
+      background: var(--gold);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .logo-mark svg {
+      width: 18px;
+      height: 18px;
+      fill: var(--navy-dark);
+    }
+
+    .logo-text {
+      font-family: 'Playfair Display', serif;
+      font-size: 20px;
+      font-weight: 600;
+      color: var(--gold);
+      letter-spacing: 0.5px;
+    }
+
+    .slide-light .logo-text {
+      color: var(--navy);
+    }
+
+    .section-tag {
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: var(--gold);
+      opacity: 0.9;
+    }
+
+    /* Content */
+    .content {
+      padding: 32px 60px 0;
+    }
+
+    h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: 48px;
+      font-weight: 600;
+      line-height: 1.15;
+      margin-bottom: 16px;
+      letter-spacing: -0.5px;
+    }
+
+    h2 {
+      font-size: 32px;
+      font-weight: 600;
+      margin-bottom: 8px;
+      line-height: 1.2;
+      letter-spacing: -0.3px;
+    }
+
+    .slide-light h2 {
+      color: var(--navy);
+    }
+
+    h3 {
+      font-size: 15px;
+      font-weight: 600;
+      margin-bottom: 8px;
+      letter-spacing: -0.2px;
+    }
+
+    .accent {
+      color: var(--gold);
+    }
+
+    .slide-light .accent {
+      color: var(--gold-dark);
+    }
+
+    .subtitle {
+      font-size: 16px;
+      font-weight: 400;
+      color: rgba(255,255,255,0.7);
+      max-width: 640px;
+      line-height: 1.6;
+    }
+
+    .slide-light .subtitle {
+      color: var(--text-muted);
+    }
+
+    /* Grids */
+    .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+    .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+    .grid-4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
+    .grid-5 { display: grid; grid-template-columns: repeat(5, 1fr); gap: 14px; }
+
+    /* Cards */
+    .card {
+      background: rgba(255,255,255,0.04);
+      border: 1px solid var(--border-light);
+      border-radius: 12px;
+      padding: 24px;
+    }
+
+    .card-solid {
+      background: var(--navy-mid);
+      border-radius: 12px;
+      padding: 24px;
+    }
+
+    .card-gold {
+      background: linear-gradient(135deg, var(--gold) 0%, var(--gold-dark) 100%);
+      border-radius: 12px;
+      padding: 24px;
+      color: var(--navy-dark);
+    }
+
+    .slide-light .card {
+      background: var(--white);
+      border: 1px solid var(--border-dark);
+      box-shadow: 0 1px 3px rgba(0,0,0,0.04);
+    }
+
+    .slide-light .card-navy {
+      background: var(--navy);
+      color: var(--white);
+      border-radius: 12px;
+      padding: 24px;
+    }
+
+    /* Stats */
+    .stat-value {
+      font-size: 40px;
+      font-weight: 700;
+      color: var(--gold);
+      line-height: 1;
+      margin-bottom: 6px;
+      letter-spacing: -1px;
+    }
+
+    .stat-label {
+      font-size: 12px;
+      font-weight: 500;
+      opacity: 0.7;
+      line-height: 1.3;
+    }
+
+    /* Metric boxes */
+    .metric-box {
+      background: rgba(212, 165, 116, 0.1);
+      border: 1px solid rgba(212, 165, 116, 0.3);
+      border-radius: 10px;
+      padding: 20px 16px;
+      text-align: center;
+    }
+
+    .metric-box .value {
+      font-size: 28px;
+      font-weight: 700;
+      color: var(--gold);
+      letter-spacing: -0.5px;
+    }
+
+    .metric-box .label {
+      font-size: 11px;
+      font-weight: 500;
+      margin-top: 4px;
+      opacity: 0.7;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    /* Lists */
+    ul {
+      list-style: none;
+      padding: 0;
+    }
+
+    ul li {
+      padding: 6px 0;
+      padding-left: 20px;
+      position: relative;
+      font-size: 13px;
+      line-height: 1.5;
+    }
+
+    ul li::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 12px;
+      width: 6px;
+      height: 6px;
+      background: var(--gold);
+      border-radius: 50%;
+    }
+
+    /* Icon containers */
+    .icon-box {
+      width: 44px;
+      height: 44px;
+      background: rgba(212, 165, 116, 0.15);
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .icon-box svg {
+      width: 22px;
+      height: 22px;
+      stroke: var(--gold);
+      fill: none;
+      stroke-width: 1.5;
+    }
+
+    .icon-circle {
+      width: 48px;
+      height: 48px;
+      background: var(--gold);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .icon-circle svg {
+      width: 24px;
+      height: 24px;
+      stroke: var(--navy-dark);
+      fill: none;
+      stroke-width: 1.5;
+    }
+
+    /* Step numbers */
+    .step-num {
+      width: 36px;
+      height: 36px;
+      background: var(--gold);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      font-size: 15px;
+      color: var(--navy-dark);
+      margin: 0 auto 12px;
+    }
+
+    /* Footer */
+    .footer {
+      position: absolute;
+      bottom: 20px;
+      left: 60px;
+      right: 60px;
+      display: flex;
+      justify-content: space-between;
+      font-size: 10px;
+      opacity: 0.4;
+      font-weight: 500;
+    }
+
+    /* Bar charts */
+    .bar-row {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 12px;
+    }
+
+    .bar-label {
+      width: 28px;
+      font-size: 11px;
+      font-weight: 600;
+      color: rgba(255,255,255,0.6);
+    }
+
+    .bar-track {
+      flex: 1;
+      height: 32px;
+      background: rgba(255,255,255,0.05);
+      border-radius: 6px;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .bar-fill {
+      height: 100%;
+      background: linear-gradient(90deg, var(--gold) 0%, var(--gold-light) 100%);
+      border-radius: 6px;
+      display: flex;
+      align-items: center;
+      padding-left: 12px;
+      font-weight: 600;
+      font-size: 12px;
+      color: var(--navy-dark);
+    }
+
+    /* Timeline */
+    .timeline-row {
+      display: flex;
+      gap: 16px;
+      margin-top: 24px;
+    }
+
+    .timeline-item {
+      flex: 1;
+      position: relative;
+    }
+
+    .timeline-dot {
+      width: 32px;
+      height: 32px;
+      background: var(--gold);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      font-size: 11px;
+      color: var(--navy-dark);
+      margin-bottom: 12px;
+    }
+
+    .timeline-item h4 {
+      color: var(--gold);
+      font-size: 13px;
+      font-weight: 600;
+      margin-bottom: 6px;
+    }
+
+    .timeline-item p {
+      font-size: 12px;
+      opacity: 0.75;
+      line-height: 1.5;
+    }
+
+    /* Feature row */
+    .feature-row {
+      display: flex;
+      gap: 16px;
+      align-items: flex-start;
+      margin-bottom: 20px;
+    }
+
+    .feature-row:last-child {
+      margin-bottom: 0;
+    }
+
+    .feature-content h4 {
+      font-size: 14px;
+      font-weight: 600;
+      margin-bottom: 4px;
+      color: var(--gold);
+    }
+
+    .feature-content p {
+      font-size: 13px;
+      opacity: 0.75;
+      line-height: 1.5;
+    }
+
+    /* Donut chart */
+    .donut-chart {
+      width: 200px;
+      height: 200px;
+      border-radius: 50%;
+      background: conic-gradient(
+        var(--gold) 0deg 232deg,
+        var(--navy-mid) 232deg 313deg,
+        #4a5568 313deg 351deg,
+        #718096 351deg 360deg
+      );
+      position: relative;
+      margin: 0 auto;
+    }
+
+    .donut-center {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 120px;
+      height: 120px;
+      background: var(--cream);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+    }
+
+    .donut-center .value {
+      font-size: 28px;
+      font-weight: 700;
+      color: var(--navy);
+    }
+
+    .donut-center .label {
+      font-size: 11px;
+      color: var(--text-muted);
+    }
+
+    /* Legend */
+    .legend {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 16px;
+      margin-top: 20px;
+      justify-content: center;
+    }
+
+    .legend-item {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 12px;
+    }
+
+    .legend-dot {
+      width: 12px;
+      height: 12px;
+      border-radius: 3px;
+    }
+
+    /* Tags */
+    .tag {
+      display: inline-block;
+      background: var(--gold);
+      color: var(--navy-dark);
+      font-size: 9px;
+      font-weight: 700;
+      padding: 4px 10px;
+      border-radius: 4px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    /* Quote */
+    .quote-box {
+      background: linear-gradient(135deg, var(--gold) 0%, var(--gold-dark) 100%);
+      border-radius: 12px;
+      padding: 24px 28px;
+      color: var(--navy-dark);
+    }
+
+    .quote-box p {
+      font-size: 15px;
+      font-weight: 500;
+      line-height: 1.6;
+      text-align: center;
+    }
+
+    /* Cover specific */
+    .cover-content {
+      padding: 80px 80px 0;
+    }
+
+    .cover-content .tagline {
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 20px;
+    }
+
+    .cover-content h1 {
+      font-size: 56px;
+      margin-bottom: 16px;
+    }
+
+    .cover-content .subtitle {
+      font-size: 18px;
+      margin-bottom: 40px;
+    }
+
+    /* Pricing rows */
+    .price-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 16px 0;
+      border-bottom: 1px solid var(--border-light);
+    }
+
+    .price-row:last-child {
+      border-bottom: none;
+    }
+
+    .price-row h4 {
+      color: var(--gold);
+      font-size: 14px;
+      font-weight: 600;
+    }
+
+    .price-row p {
+      font-size: 12px;
+      opacity: 0.6;
+      margin-top: 2px;
+    }
+
+    .price-row .price {
+      font-size: 24px;
+      font-weight: 700;
+      color: var(--gold);
+    }
+
+    .price-row .price span {
+      font-size: 12px;
+      font-weight: 500;
+      opacity: 0.7;
+    }
+
+    /* Allocation rows */
+    .alloc-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 14px 20px;
+      background: var(--white);
+      border: 1px solid var(--border-dark);
+      border-radius: 10px;
+      margin-bottom: 12px;
+    }
+
+    .alloc-row:last-child {
+      margin-bottom: 0;
+    }
+
+    .alloc-row h4 {
+      color: var(--navy);
+      font-size: 14px;
+      font-weight: 600;
+    }
+
+    .alloc-row p {
+      font-size: 12px;
+      color: var(--text-muted);
+      margin-top: 2px;
+    }
+
+    .alloc-row .amount {
+      font-size: 20px;
+      font-weight: 700;
+      color: var(--gold-dark);
+    }
+
+    @media print {
+      .slide { page-break-after: always; margin: 0; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- SLIDE 1: Cover -->
+  <div class="slide slide-dark">
+    <div class="confidential">Confidential — For Investor Review Only</div>
+    <div class="cover-content">
+      <div class="logo" style="margin-bottom: 48px;">
+        <div class="logo-mark">
+          <svg viewBox="0 0 24 24"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+        </div>
+        <span class="logo-text">DreamBuZZ</span>
+      </div>
+      <div class="tagline">Series Seed — 2026</div>
+      <h1>Unlock the Power<br>of Your <span class="accent">Dreams</span></h1>
+      <p class="subtitle">AI-powered dream interpretation and mental wellness platform helping millions find clarity, connection, and inner peace.</p>
+      <div class="grid-4" style="max-width: 680px;">
+        <div class="metric-box">
+          <div class="value">$5M</div>
+          <div class="label">AUD Raising</div>
+        </div>
+        <div class="metric-box">
+          <div class="value">$25M</div>
+          <div class="label">Valuation</div>
+        </div>
+        <div class="metric-box">
+          <div class="value">30K+</div>
+          <div class="label">Users</div>
+        </div>
+        <div class="metric-box">
+          <div class="value">80%</div>
+          <div class="label">Retention</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SLIDE 2: Problem -->
+  <div class="slide slide-dark">
+    <div class="confidential">Confidential — For Investor Review Only</div>
+    <div class="header">
+      <div class="logo">
+        <div class="logo-mark" style="width: 28px; height: 28px;">
+          <svg viewBox="0 0 24 24" style="width: 16px; height: 16px;"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+        </div>
+        <span class="logo-text" style="font-size: 18px;">DreamBuZZ</span>
+      </div>
+      <div class="section-tag">01 — The Problem</div>
+    </div>
+    <div class="content">
+      <h2>A Global Mental Health <span class="accent">Crisis</span></h2>
+      <p class="subtitle" style="margin-bottom: 28px;">Billions struggle with mental wellness, yet existing solutions fail to address root causes.</p>
+      <div class="grid-4" style="margin-bottom: 24px;">
+        <div class="card" style="text-align: center; padding: 28px 20px;">
+          <div class="stat-value">970M</div>
+          <div class="stat-label">People suffer from mental<br>health issues globally</div>
+        </div>
+        <div class="card" style="text-align: center; padding: 28px 20px;">
+          <div class="stat-value">1 in 3</div>
+          <div class="stat-label">People worldwide suffer<br>from sleep disorders</div>
+        </div>
+        <div class="card" style="text-align: center; padding: 28px 20px;">
+          <div class="stat-value">74%</div>
+          <div class="stat-label">Of people report feeling<br>stressed regularly</div>
+        </div>
+        <div class="card" style="text-align: center; padding: 28px 20px;">
+          <div class="stat-value">750K+</div>
+          <div class="stat-label">Annual suicides could<br>be prevented</div>
+        </div>
+      </div>
+      <div class="card-gold">
+        <div style="display: flex; align-items: center; gap: 24px;">
+          <div class="icon-circle" style="background: var(--navy-dark); width: 56px; height: 56px;">
+            <svg viewBox="0 0 24 24" style="stroke: var(--gold); width: 28px; height: 28px;"><circle cx="12" cy="12" r="10"/><path d="M8 14s1.5 2 4 2 4-2 4-2M9 9h.01M15 9h.01"/></svg>
+          </div>
+          <div style="flex: 1;">
+            <h3 style="margin-bottom: 4px; color: var(--navy-dark);">The Missing Piece</h3>
+            <p style="font-size: 14px; color: var(--navy-dark); opacity: 0.85; line-height: 1.5;">Dreams hold the key to understanding our subconscious. Yet 50% of people say dream dictionaries don't work, and 45% would pay for accurate dream interpretation.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="footer">
+      <span>DreamBuzz — Confidential</span>
+      <span>2</span>
+    </div>
+  </div>
+
+  <!-- SLIDE 3: Solution -->
+  <div class="slide slide-light">
+    <div class="confidential">Confidential — For Investor Review Only</div>
+    <div class="header">
+      <div class="logo">
+        <div class="logo-mark" style="width: 28px; height: 28px;">
+          <svg viewBox="0 0 24 24" style="width: 16px; height: 16px;"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+        </div>
+        <span class="logo-text" style="font-size: 18px;">DreamBuZZ</span>
+      </div>
+      <div class="section-tag">02 — The Solution</div>
+    </div>
+    <div class="content">
+      <h2>Your One-Stop <span class="accent">Dream Wellness</span> Platform</h2>
+      <p class="subtitle" style="margin-bottom: 28px;">AI-powered dream interpretation combined with holistic mental wellness tools.</p>
+      <div class="grid-2" style="gap: 32px;">
+        <div>
+          <div class="feature-row">
+            <div class="icon-box">
+              <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/></svg>
+            </div>
+            <div class="feature-content">
+              <h4>AI Dream Interpretation</h4>
+              <p>Personalized, detailed analysis with actionable insights for life decisions.</p>
+            </div>
+          </div>
+          <div class="feature-row">
+            <div class="icon-box">
+              <svg viewBox="0 0 24 24"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+            </div>
+            <div class="feature-content">
+              <h4>Sleep Meditation</h4>
+              <p>Break free from sleeping pills with guided meditation for deep, restorative sleep.</p>
+            </div>
+          </div>
+          <div class="feature-row">
+            <div class="icon-box">
+              <svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+            </div>
+            <div class="feature-content">
+              <h4>Dream Pal Community</h4>
+              <p>Connect with like-minded dreamers, share experiences, build relationships.</p>
+            </div>
+          </div>
+          <div class="feature-row">
+            <div class="icon-box">
+              <svg viewBox="0 0 24 24"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
+            </div>
+            <div class="feature-content">
+              <h4>Journals & Podcasts</h4>
+              <p>Track patterns, access expert content, unlock your subconscious potential.</p>
+            </div>
+          </div>
+        </div>
+        <div class="card-navy" style="display: flex; flex-direction: column; justify-content: center; padding: 32px;">
+          <div style="text-align: center;">
+            <div class="icon-circle" style="margin: 0 auto 20px; width: 64px; height: 64px;">
+              <svg viewBox="0 0 24 24" style="width: 32px; height: 32px;"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+            </div>
+            <h3 style="color: var(--gold); font-size: 20px; margin-bottom: 12px;">Dream Predictions</h3>
+            <p style="font-size: 13px; opacity: 0.8; line-height: 1.6;">Our algorithm aggregates dream patterns across regions to forecast potential events — from natural disasters to market shifts — before traditional methods detect them.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="footer" style="color: var(--text-muted);">
+      <span>DreamBuzz — Confidential</span>
+      <span>3</span>
+    </div>
+  </div>
+
+  <!-- SLIDE 4: How It Works -->
+  <div class="slide slide-dark">
+    <div class="confidential">Confidential — For Investor Review Only</div>
+    <div class="header">
+      <div class="logo">
+        <div class="logo-mark" style="width: 28px; height: 28px;">
+          <svg viewBox="0 0 24 24" style="width: 16px; height: 16px;"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+        </div>
+        <span class="logo-text" style="font-size: 18px;">DreamBuZZ</span>
+      </div>
+      <div class="section-tag">03 — How It Works</div>
+    </div>
+    <div class="content">
+      <h2>Simple <span class="accent">Three-Step</span> Process</h2>
+      <p class="subtitle" style="margin-bottom: 32px;">Personalized dream interpretation delivered within 3 days.</p>
+      <div class="grid-3" style="gap: 24px; margin-bottom: 28px;">
+        <div class="card" style="text-align: center; padding: 32px 24px;">
+          <div class="step-num">1</div>
+          <h3 style="color: var(--gold); margin-bottom: 8px;">Record Your Dream</h3>
+          <p style="font-size: 13px; opacity: 0.75; line-height: 1.5;">Fill out our dream form on web or mobile. Available in English, Arabic, and Farsi.</p>
+        </div>
+        <div class="card" style="text-align: center; padding: 32px 24px;">
+          <div class="step-num">2</div>
+          <h3 style="color: var(--gold); margin-bottom: 8px;">AI Analysis</h3>
+          <p style="font-size: 13px; opacity: 0.75; line-height: 1.5;">Our AI analyzes your dream using 13+ years of research data and delivers a detailed report.</p>
+        </div>
+        <div class="card" style="text-align: center; padding: 32px 24px;">
+          <div class="step-num">3</div>
+          <h3 style="color: var(--gold); margin-bottom: 8px;">Achieve Clarity</h3>
+          <p style="font-size: 13px; opacity: 0.75; line-height: 1.5;">Receive actionable insights, connect with dream pals, access journals and podcasts.</p>
+        </div>
+      </div>
+      <div class="card-solid" style="display: flex; align-items: center; justify-content: space-between; padding: 24px 28px;">
+        <div style="flex: 1;">
+          <h3 style="color: var(--gold); margin-bottom: 6px;">Creating Dream Connections</h3>
+          <p style="font-size: 13px; opacity: 0.8; line-height: 1.5;">Our app matches dreamers with similar patterns, enabling them to share insights, find meaning together, and build genuine relationships.</p>
+        </div>
+        <div style="display: flex; margin-left: 32px;">
+          <div style="width: 44px; height: 44px; background: var(--gold); border-radius: 50%; display: flex; align-items: center; justify-content: center;">
+            <svg viewBox="0 0 24 24" style="width: 22px; height: 22px; stroke: var(--navy-dark); fill: none; stroke-width: 1.5;"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+          </div>
+          <div style="width: 44px; height: 44px; background: var(--gold-dark); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin-left: -12px;">
+            <svg viewBox="0 0 24 24" style="width: 22px; height: 22px; stroke: var(--navy-dark); fill: none; stroke-width: 1.5;"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+          </div>
+          <div style="width: 44px; height: 44px; background: var(--gold-light); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin-left: -12px;">
+            <svg viewBox="0 0 24 24" style="width: 22px; height: 22px; stroke: var(--navy-dark); fill: none; stroke-width: 1.5;"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="footer">
+      <span>DreamBuzz — Confidential</span>
+      <span>4</span>
+    </div>
+  </div>
+
+  <!-- SLIDE 5: Market -->
+  <div class="slide slide-light">
+    <div class="confidential">Confidential — For Investor Review Only</div>
+    <div class="header">
+      <div class="logo">
+        <div class="logo-mark" style="width: 28px; height: 28px;">
+          <svg viewBox="0 0 24 24" style="width: 16px; height: 16px;"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+        </div>
+        <span class="logo-text" style="font-size: 18px;">DreamBuZZ</span>
+      </div>
+      <div class="section-tag">04 — Market Opportunity</div>
+    </div>
+    <div class="content">
+      <h2>A <span class="accent">Massive</span> Market Awaits</h2>
+      <p class="subtitle" style="margin-bottom: 28px;">The global wellness industry is experiencing unprecedented growth.</p>
+      <div class="grid-2" style="gap: 28px; margin-bottom: 24px;">
+        <div class="card" style="padding: 28px;">
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+            <div>
+              <h3 style="color: var(--navy); font-size: 12px; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 2px;">Global Wellness Market</h3>
+              <p style="font-size: 11px; color: var(--text-muted);">Source: Statista</p>
+            </div>
+            <div class="tag">8.6% CAGR</div>
+          </div>
+          <div style="display: flex; align-items: flex-end; justify-content: center; gap: 40px;">
+            <div style="text-align: center;">
+              <div style="font-size: 11px; color: var(--text-muted); margin-bottom: 8px;">2022</div>
+              <div style="width: 80px; height: 80px; background: var(--navy-mid); border-radius: 8px; display: flex; align-items: center; justify-content: center;">
+                <span style="color: white; font-weight: 700; font-size: 18px;">$5.6T</span>
+              </div>
+            </div>
+            <div style="font-size: 24px; color: var(--gold-dark); margin-bottom: 30px;">→</div>
+            <div style="text-align: center;">
+              <div style="font-size: 11px; color: var(--text-muted); margin-bottom: 8px;">2027</div>
+              <div style="width: 80px; height: 140px; background: var(--gold); border-radius: 8px; display: flex; align-items: center; justify-content: center;">
+                <span style="color: var(--navy-dark); font-weight: 700; font-size: 18px;">$18.5T</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="card" style="padding: 28px;">
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+            <div>
+              <h3 style="color: var(--navy); font-size: 12px; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 2px;">Mental Wellness Market</h3>
+              <p style="font-size: 11px; color: var(--text-muted);">Source: Ace Analytics</p>
+            </div>
+            <div class="tag">8.2% CAGR</div>
+          </div>
+          <div style="display: flex; align-items: flex-end; justify-content: center; gap: 40px;">
+            <div style="text-align: center;">
+              <div style="font-size: 11px; color: var(--text-muted); margin-bottom: 8px;">2023</div>
+              <div style="width: 80px; height: 80px; background: var(--navy-mid); border-radius: 8px; display: flex; align-items: center; justify-content: center;">
+                <span style="color: white; font-weight: 700; font-size: 18px;">$149B</span>
+              </div>
+            </div>
+            <div style="font-size: 24px; color: var(--gold-dark); margin-bottom: 30px;">→</div>
+            <div style="text-align: center;">
+              <div style="font-size: 11px; color: var(--text-muted); margin-bottom: 8px;">2031</div>
+              <div style="width: 80px; height: 140px; background: var(--gold); border-radius: 8px; display: flex; align-items: center; justify-content: center;">
+                <span style="color: var(--navy-dark); font-weight: 700; font-size: 18px;">$275B</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="card-navy" style="display: flex; align-items: center; justify-content: space-between; padding: 20px 28px;">
+        <div>
+          <h3 style="color: var(--gold); margin-bottom: 4px;">Even 1% Market Share = Massive Opportunity</h3>
+          <p style="font-size: 13px; opacity: 0.8;">USA has 61,000+ active tech startups. India has 1 billion potential users. We're at the intersection of wellness, AI, and community.</p>
+        </div>
+        <div class="icon-circle" style="background: var(--gold); margin-left: 24px;">
+          <svg viewBox="0 0 24 24" style="stroke: var(--navy-dark);"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg>
+        </div>
+      </div>
+    </div>
+    <div class="footer" style="color: var(--text-muted);">
+      <span>DreamBuzz — Confidential</span>
+      <span>5</span>
+    </div>
+  </div>
+
+  <!-- SLIDE 6: Business Model -->
+  <div class="slide slide-dark">
+    <div class="confidential">Confidential — For Investor Review Only</div>
+    <div class="header">
+      <div class="logo">
+        <div class="logo-mark" style="width: 28px; height: 28px;">
+          <svg viewBox="0 0 24 24" style="width: 16px; height: 16px;"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+        </div>
+        <span class="logo-text" style="font-size: 18px;">DreamBuZZ</span>
+      </div>
+      <div class="section-tag">05 — Business Model</div>
+    </div>
+    <div class="content">
+      <h2>Multiple <span class="accent">Revenue Streams</span></h2>
+      <p class="subtitle" style="margin-bottom: 28px;">Subscription-based model with strong unit economics.</p>
+      <div class="grid-2" style="gap: 28px;">
+        <div class="card" style="padding: 0;">
+          <div class="price-row" style="padding: 20px 24px;">
+            <div>
+              <h4>Premium Subscription</h4>
+              <p>Full platform access, unlimited interpretations</p>
+            </div>
+            <div class="price">$19<span>/mo</span></div>
+          </div>
+          <div class="price-row" style="padding: 20px 24px;">
+            <div>
+              <h4>Dream Interpretation</h4>
+              <p>One-time detailed analysis with report</p>
+            </div>
+            <div class="price">$11</div>
+          </div>
+          <div class="price-row" style="padding: 20px 24px;">
+            <div>
+              <h4>Downloadable Courses</h4>
+              <p>Sleep meditation, dream mastery</p>
+            </div>
+            <div class="price">$7</div>
+          </div>
+          <div class="price-row" style="padding: 20px 24px;">
+            <div>
+              <h4>Dream eBooks</h4>
+              <p>Written by founder and experts</p>
+            </div>
+            <div class="price">$5</div>
+          </div>
+        </div>
+        <div class="card-solid" style="padding: 28px;">
+          <h3 style="color: var(--gold); margin-bottom: 16px; font-size: 16px;">B2B Corporate Wellness</h3>
+          <ul style="margin-bottom: 24px;">
+            <li>Enterprise licensing for employee wellness programs</li>
+            <li>Work productivity insights through dream analysis</li>
+            <li>Corporate retreat partnerships</li>
+            <li>White-label solutions for wellness providers</li>
+          </ul>
+          <div style="display: flex; justify-content: space-between; padding-top: 20px; border-top: 1px solid var(--border-light);">
+            <div style="text-align: center;">
+              <div style="font-size: 28px; font-weight: 700; color: var(--gold);">80%</div>
+              <div style="font-size: 11px; opacity: 0.7;">Retention</div>
+            </div>
+            <div style="text-align: center;">
+              <div style="font-size: 28px; font-weight: 700; color: var(--gold);">3x</div>
+              <div style="font-size: 11px; opacity: 0.7;">LTV/CAC</div>
+            </div>
+            <div style="text-align: center;">
+              <div style="font-size: 28px; font-weight: 700; color: var(--gold);">70%</div>
+              <div style="font-size: 11px; opacity: 0.7;">Gross Margin</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="footer">
+      <span>DreamBuzz — Confidential</span>
+      <span>6</span>
+    </div>
+  </div>
+
+  <!-- SLIDE 7: Traction -->
+  <div class="slide slide-light">
+    <div class="confidential">Confidential — For Investor Review Only</div>
+    <div class="header">
+      <div class="logo">
+        <div class="logo-mark" style="width: 28px; height: 28px;">
+          <svg viewBox="0 0 24 24" style="width: 16px; height: 16px;"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+        </div>
+        <span class="logo-text" style="font-size: 18px;">DreamBuZZ</span>
+      </div>
+      <div class="section-tag">06 — Traction</div>
+    </div>
+    <div class="content">
+      <h2>Proven <span class="accent">Market Validation</span></h2>
+      <p class="subtitle" style="margin-bottom: 28px;">Bootstrapped growth with exceptional retention metrics.</p>
+      <div class="grid-4" style="margin-bottom: 24px;">
+        <div class="card" style="text-align: center; padding: 28px 16px;">
+          <div style="font-size: 40px; font-weight: 700; color: var(--gold-dark); line-height: 1;">30K+</div>
+          <div style="font-size: 13px; color: var(--text-muted); margin-top: 8px;">Clients Reached</div>
+          <div style="font-size: 11px; color: var(--navy); margin-top: 2px;">Through books & platform</div>
+        </div>
+        <div class="card" style="text-align: center; padding: 28px 16px;">
+          <div style="font-size: 40px; font-weight: 700; color: var(--gold-dark); line-height: 1;">80%</div>
+          <div style="font-size: 13px; color: var(--text-muted); margin-top: 8px;">Retention Rate</div>
+          <div style="font-size: 11px; color: var(--navy); margin-top: 2px;">Industry-leading</div>
+        </div>
+        <div class="card" style="text-align: center; padding: 28px 16px;">
+          <div style="font-size: 40px; font-weight: 700; color: var(--gold-dark); line-height: 1;">2 Yrs</div>
+          <div style="font-size: 13px; color: var(--text-muted); margin-top: 8px;">Growth Track</div>
+          <div style="font-size: 11px; color: var(--navy); margin-top: 2px;">Since March 2023</div>
+        </div>
+        <div class="card" style="text-align: center; padding: 28px 16px;">
+          <div style="font-size: 40px; font-weight: 700; color: var(--gold-dark); line-height: 1;">Live</div>
+          <div style="font-size: 13px; color: var(--text-muted); margin-top: 8px;">Android App</div>
+          <div style="font-size: 11px; color: var(--navy); margin-top: 2px;">Google Play</div>
+        </div>
+      </div>
+      <div class="grid-2" style="gap: 24px;">
+        <div class="card-navy" style="padding: 24px;">
+          <h3 style="color: var(--gold); margin-bottom: 12px; font-size: 14px;">Current Status</h3>
+          <ul>
+            <li style="color: var(--white);">Bootstrapped with angel investments</li>
+            <li style="color: var(--white);">Website live: dreambuzz.site</li>
+            <li style="color: var(--white);">Android prototype available</li>
+            <li style="color: var(--white);">Multi-language support (EN/AR/FA)</li>
+            <li style="color: var(--white);">Published dream interpretation books</li>
+          </ul>
+        </div>
+        <div class="card-navy" style="padding: 24px;">
+          <h3 style="color: var(--gold); margin-bottom: 12px; font-size: 14px;">Target Audience</h3>
+          <ul>
+            <li style="color: var(--white);">Wellness-conscious individuals</li>
+            <li style="color: var(--white);">People seeking dream understanding</li>
+            <li style="color: var(--white);">Social media dream followers</li>
+            <li style="color: var(--white);">Self-aware professionals aged 25-44</li>
+            <li style="color: var(--white);">Corporate wellness programs</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="footer" style="color: var(--text-muted);">
+      <span>DreamBuzz — Confidential</span>
+      <span>7</span>
+    </div>
+  </div>
+
+  <!-- SLIDE 8: Financials -->
+  <div class="slide slide-dark">
+    <div class="confidential">Confidential — For Investor Review Only</div>
+    <div class="header">
+      <div class="logo">
+        <div class="logo-mark" style="width: 28px; height: 28px;">
+          <svg viewBox="0 0 24 24" style="width: 16px; height: 16px;"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+        </div>
+        <span class="logo-text" style="font-size: 18px;">DreamBuZZ</span>
+      </div>
+      <div class="section-tag">07 — Financial Projections</div>
+    </div>
+    <div class="content">
+      <h2>Path to <span class="accent">Profitability</span></h2>
+      <p class="subtitle" style="margin-bottom: 24px;">Aggressive but achievable growth trajectory. All figures in USD millions.</p>
+      <div class="grid-2" style="gap: 28px; margin-bottom: 20px;">
+        <div class="card" style="padding: 24px;">
+          <h3 style="color: var(--gold); margin-bottom: 16px; font-size: 14px;">Revenue Growth</h3>
+          <div class="bar-row">
+            <span class="bar-label">Y1</span>
+            <div class="bar-track"><div class="bar-fill" style="width: 5%;">$0.07M</div></div>
+          </div>
+          <div class="bar-row">
+            <span class="bar-label">Y2</span>
+            <div class="bar-track"><div class="bar-fill" style="width: 15%;">$3.2M</div></div>
+          </div>
+          <div class="bar-row">
+            <span class="bar-label">Y3</span>
+            <div class="bar-track"><div class="bar-fill" style="width: 35%;">$23.6M</div></div>
+          </div>
+          <div class="bar-row">
+            <span class="bar-label">Y4</span>
+            <div class="bar-track"><div class="bar-fill" style="width: 76%;">$61.2M</div></div>
+          </div>
+          <div class="bar-row" style="margin-bottom: 0;">
+            <span class="bar-label">Y5</span>
+            <div class="bar-track"><div class="bar-fill" style="width: 100%;">$80M</div></div>
+          </div>
+        </div>
+        <div class="card" style="padding: 24px;">
+          <h3 style="color: var(--gold); margin-bottom: 16px; font-size: 14px;">EBITDA Trajectory</h3>
+          <div class="bar-row">
+            <span class="bar-label">Y1</span>
+            <div class="bar-track"><div class="bar-fill" style="width: 8%; background: var(--navy-mid); color: white;">-$0.3M</div></div>
+          </div>
+          <div class="bar-row">
+            <span class="bar-label">Y2</span>
+            <div class="bar-track"><div class="bar-fill" style="width: 10%;">$0.8M</div></div>
+          </div>
+          <div class="bar-row">
+            <span class="bar-label">Y3</span>
+            <div class="bar-track"><div class="bar-fill" style="width: 30%;">$12.8M</div></div>
+          </div>
+          <div class="bar-row">
+            <span class="bar-label">Y4</span>
+            <div class="bar-track"><div class="bar-fill" style="width: 77%;">$37.1M</div></div>
+          </div>
+          <div class="bar-row" style="margin-bottom: 0;">
+            <span class="bar-label">Y5</span>
+            <div class="bar-track"><div class="bar-fill" style="width: 100%;">$48.3M</div></div>
+          </div>
+        </div>
+      </div>
+      <div class="grid-3">
+        <div class="card-solid" style="text-align: center; padding: 20px;">
+          <div style="font-size: 32px; font-weight: 700; color: var(--gold);">1000x</div>
+          <div style="font-size: 12px; opacity: 0.7; margin-top: 4px;">Revenue Growth (Y1→Y5)</div>
+        </div>
+        <div class="card-solid" style="text-align: center; padding: 20px;">
+          <div style="font-size: 32px; font-weight: 700; color: var(--gold);">60%</div>
+          <div style="font-size: 12px; opacity: 0.7; margin-top: 4px;">EBITDA Margin by Y5</div>
+        </div>
+        <div class="card-solid" style="text-align: center; padding: 20px;">
+          <div style="font-size: 32px; font-weight: 700; color: var(--gold);">Y2</div>
+          <div style="font-size: 12px; opacity: 0.7; margin-top: 4px;">Breakeven Target</div>
+        </div>
+      </div>
+    </div>
+    <div class="footer">
+      <span>DreamBuzz — Confidential</span>
+      <span>8</span>
+    </div>
+  </div>
+
+  <!-- SLIDE 9: Competitive Edge -->
+  <div class="slide slide-light">
+    <div class="confidential">Confidential — For Investor Review Only</div>
+    <div class="header">
+      <div class="logo">
+        <div class="logo-mark" style="width: 28px; height: 28px;">
+          <svg viewBox="0 0 24 24" style="width: 16px; height: 16px;"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+        </div>
+        <span class="logo-text" style="font-size: 18px;">DreamBuZZ</span>
+      </div>
+      <div class="section-tag">08 — Competitive Edge</div>
+    </div>
+    <div class="content">
+      <h2>Our <span class="accent">Competitive</span> Advantage</h2>
+      <p class="subtitle" style="margin-bottom: 28px;">Competitors lack modern AI capabilities and genuine human connection.</p>
+      <div class="grid-2" style="gap: 28px; margin-bottom: 24px;">
+        <div class="card" style="padding: 24px;">
+          <h3 style="color: var(--navy); margin-bottom: 16px; font-size: 14px;">Existing Solutions Fall Short</h3>
+          <div style="display: flex; gap: 12px; margin-bottom: 16px;">
+            <span style="background: var(--cream-dark); padding: 6px 14px; border-radius: 6px; font-size: 12px; font-weight: 500;">Co—Star</span>
+            <span style="background: var(--cream-dark); padding: 6px 14px; border-radius: 6px; font-size: 12px; font-weight: 500;">WeDream</span>
+            <span style="background: var(--cream-dark); padding: 6px 14px; border-radius: 6px; font-size: 12px; font-weight: 500;">Dream Dictionaries</span>
+          </div>
+          <ul>
+            <li>Generic interpretations without personalization</li>
+            <li>No AI-powered analysis or pattern recognition</li>
+            <li>Missing community and connection features</li>
+            <li>No predictive capabilities</li>
+          </ul>
+        </div>
+        <div class="card-navy" style="padding: 24px;">
+          <h3 style="color: var(--gold); margin-bottom: 16px; font-size: 14px;">DreamBuzz Advantage</h3>
+          <ul>
+            <li style="color: var(--white);">13+ years of dream research by founder</li>
+            <li style="color: var(--white);">Proprietary IP and published books</li>
+            <li style="color: var(--white);">AI model trained on real case studies</li>
+            <li style="color: var(--white);">Multi-language support from day one</li>
+            <li style="color: var(--white);">Community-driven dream connections</li>
+            <li style="color: var(--white);">Scalable tech with automated responses</li>
+            <li style="color: var(--white);">Regional dream prediction algorithms</li>
+          </ul>
+        </div>
+      </div>
+      <div class="quote-box">
+        <p>"DreamBuzz helps clients make sense of dream images, connect dreamers with each other, and unlock future predictions — unlike any other player in the market."</p>
+      </div>
+    </div>
+    <div class="footer" style="color: var(--text-muted);">
+      <span>DreamBuzz — Confidential</span>
+      <span>9</span>
+    </div>
+  </div>
+
+  <!-- SLIDE 10: Team -->
+  <div class="slide slide-dark">
+    <div class="confidential">Confidential — For Investor Review Only</div>
+    <div class="header">
+      <div class="logo">
+        <div class="logo-mark" style="width: 28px; height: 28px;">
+          <svg viewBox="0 0 24 24" style="width: 16px; height: 16px;"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+        </div>
+        <span class="logo-text" style="font-size: 18px;">DreamBuZZ</span>
+      </div>
+      <div class="section-tag">09 — The Team</div>
+    </div>
+    <div class="content">
+      <h2>Led by a <span class="accent">Visionary</span> Founder</h2>
+      <div class="grid-2" style="gap: 40px; margin-top: 28px;">
+        <div style="display: flex; flex-direction: column; justify-content: center;">
+          <div style="width: 140px; height: 140px; background: linear-gradient(135deg, var(--gold) 0%, var(--gold-dark) 100%); border-radius: 50%; margin-bottom: 24px; display: flex; align-items: center; justify-content: center;">
+            <svg viewBox="0 0 24 24" style="width: 64px; height: 64px; stroke: var(--navy-dark); fill: none; stroke-width: 1.2;"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+          </div>
+          <h3 style="font-size: 24px; margin-bottom: 4px;">Nuzhat Jahan</h3>
+          <p style="color: var(--gold); font-size: 14px; margin-bottom: 12px;">Founder & Director</p>
+          <p style="font-size: 13px; opacity: 0.8; line-height: 1.6;">Dream interpretation expert combining 15+ years of corporate law experience with deep research into the subconscious mind.</p>
+          <p style="font-size: 12px; opacity: 0.6; margin-top: 12px;">@dreamswithnuzhat</p>
+        </div>
+        <div>
+          <div class="card" style="margin-bottom: 16px; padding: 20px;">
+            <div style="display: flex; align-items: center; gap: 16px;">
+              <div class="icon-box">
+                <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M14.31 8l5.74 9.94M9.69 8h11.48M7.38 12l5.74-9.94M9.69 16l-5.74-9.94M14.31 16H2.83M16.62 12l-5.74 9.94"/></svg>
+              </div>
+              <div>
+                <h4 style="color: var(--gold); font-size: 14px; margin-bottom: 2px;">Corporate Law Background</h4>
+                <p style="font-size: 12px; opacity: 0.75;">15+ years helping companies scale, key person for growth strategies</p>
+              </div>
+            </div>
+          </div>
+          <div class="card" style="margin-bottom: 16px; padding: 20px;">
+            <div style="display: flex; align-items: center; gap: 16px;">
+              <div class="icon-box">
+                <svg viewBox="0 0 24 24"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
+              </div>
+              <div>
+                <h4 style="color: var(--gold); font-size: 14px; margin-bottom: 2px;">Published Author</h4>
+                <p style="font-size: 12px; opacity: 0.75;">Novelist writing on dreams, keynote speaker, published dream research</p>
+              </div>
+            </div>
+          </div>
+          <div class="card" style="margin-bottom: 16px; padding: 20px;">
+            <div style="display: flex; align-items: center; gap: 16px;">
+              <div class="icon-box">
+                <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+              </div>
+              <div>
+                <h4 style="color: var(--gold); font-size: 14px; margin-bottom: 2px;">Global Experience</h4>
+                <p style="font-size: 12px; opacity: 0.75;">Lived and worked in Auckland, London, Mumbai, and Dubai</p>
+              </div>
+            </div>
+          </div>
+          <div class="card" style="padding: 20px;">
+            <div style="display: flex; align-items: center; gap: 16px;">
+              <div class="icon-box">
+                <svg viewBox="0 0 24 24"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>
+              </div>
+              <div>
+                <h4 style="color: var(--gold); font-size: 14px; margin-bottom: 2px;">Decade of Research</h4>
+                <p style="font-size: 12px; opacity: 0.75;">Robust case study on dreams spanning 10+ years</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="footer">
+      <span>DreamBuzz — Confidential</span>
+      <span>10</span>
+    </div>
+  </div>
+
+  <!-- SLIDE 11: Use of Funds -->
+  <div class="slide slide-light">
+    <div class="confidential">Confidential — For Investor Review Only</div>
+    <div class="header">
+      <div class="logo">
+        <div class="logo-mark" style="width: 28px; height: 28px;">
+          <svg viewBox="0 0 24 24" style="width: 16px; height: 16px;"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+        </div>
+        <span class="logo-text" style="font-size: 18px;">DreamBuZZ</span>
+      </div>
+      <div class="section-tag">10 — Use of Funds</div>
+    </div>
+    <div class="content">
+      <h2>Strategic <span class="accent">Capital</span> Deployment</h2>
+      <p class="subtitle" style="margin-bottom: 28px;">$5M AUD investment to accelerate growth over 12 months.</p>
+      <div class="grid-2" style="gap: 40px;">
+        <div>
+          <div class="donut-chart">
+            <div class="donut-center">
+              <div class="value">$5M</div>
+              <div class="label">AUD</div>
+            </div>
+          </div>
+          <div class="legend">
+            <div class="legend-item">
+              <div class="legend-dot" style="background: var(--gold);"></div>
+              <span>Manpower 64.5%</span>
+            </div>
+            <div class="legend-item">
+              <div class="legend-dot" style="background: var(--navy-mid);"></div>
+              <span>Operations 22.4%</span>
+            </div>
+            <div class="legend-item">
+              <div class="legend-dot" style="background: #4a5568;"></div>
+              <span>Marketing 10.5%</span>
+            </div>
+            <div class="legend-item">
+              <div class="legend-dot" style="background: #718096;"></div>
+              <span>CAPEX 2.5%</span>
+            </div>
+          </div>
+        </div>
+        <div>
+          <div class="alloc-row">
+            <div>
+              <h4>Manpower & Engineering</h4>
+              <p>AI/ML engineers, developers, support team</p>
+            </div>
+            <div class="amount">$3.2M</div>
+          </div>
+          <div class="alloc-row">
+            <div>
+              <h4>Operating Expenses</h4>
+              <p>Infrastructure, cloud, compliance</p>
+            </div>
+            <div class="amount">$1.1M</div>
+          </div>
+          <div class="alloc-row">
+            <div>
+              <h4>Marketing & Growth</h4>
+              <p>User acquisition, brand building</p>
+            </div>
+            <div class="amount">$525K</div>
+          </div>
+          <div class="alloc-row">
+            <div>
+              <h4>Capital Expenditure</h4>
+              <p>Equipment, software licenses</p>
+            </div>
+            <div class="amount">$125K</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="footer" style="color: var(--text-muted);">
+      <span>DreamBuzz — Confidential</span>
+      <span>11</span>
+    </div>
+  </div>
+
+  <!-- SLIDE 12: Roadmap -->
+  <div class="slide slide-dark">
+    <div class="confidential">Confidential — For Investor Review Only</div>
+    <div class="header">
+      <div class="logo">
+        <div class="logo-mark" style="width: 28px; height: 28px;">
+          <svg viewBox="0 0 24 24" style="width: 16px; height: 16px;"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+        </div>
+        <span class="logo-text" style="font-size: 18px;">DreamBuZZ</span>
+      </div>
+      <div class="section-tag">11 — Roadmap</div>
+    </div>
+    <div class="content">
+      <h2>12-Month <span class="accent">Execution</span> Plan</h2>
+      <div class="timeline-row">
+        <div class="timeline-item">
+          <div class="timeline-dot">Q1</div>
+          <h4>Foundation</h4>
+          <p>Build & launch iOS/Android apps. Complete website redesign. Hire core team.</p>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-dot">Q2</div>
+          <h4>Growth</h4>
+          <p>Launch AI interpretation model. Begin India market expansion. Digital marketing push.</p>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-dot">Q3</div>
+          <h4>Scale</h4>
+          <p>End-to-end service launch. Dream Pal community features. Corporate partnerships.</p>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-dot">Q4</div>
+          <h4>Expand</h4>
+          <p>Europe expansion. Advanced AI predictions. Series A preparation.</p>
+        </div>
+      </div>
+      <div class="grid-2" style="gap: 24px; margin-top: 28px;">
+        <div class="card-solid" style="padding: 24px;">
+          <h3 style="color: var(--gold); margin-bottom: 12px; font-size: 14px;">Key Milestones</h3>
+          <ul>
+            <li>100K+ active users by Q4</li>
+            <li>Launch in 3 countries (India, UAE, UK)</li>
+            <li>10+ corporate wellness partnerships</li>
+            <li>AI model v2.0 with 90%+ accuracy</li>
+            <li>Break-even by month 18</li>
+          </ul>
+        </div>
+        <div class="card-solid" style="padding: 24px;">
+          <h3 style="color: var(--gold); margin-bottom: 12px; font-size: 14px;">Strategic Priorities</h3>
+          <ul>
+            <li>Lean startup methodology</li>
+            <li>Data-driven product decisions</li>
+            <li>Community-first growth</li>
+            <li>IP protection and expansion</li>
+            <li>Strategic partnerships focus</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="footer">
+      <span>DreamBuzz — Confidential</span>
+      <span>12</span>
+    </div>
+  </div>
+
+  <!-- SLIDE 13: The Ask -->
+  <div class="slide slide-light">
+    <div class="confidential">Confidential — For Investor Review Only</div>
+    <div class="header">
+      <div class="logo">
+        <div class="logo-mark" style="width: 28px; height: 28px;">
+          <svg viewBox="0 0 24 24" style="width: 16px; height: 16px;"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+        </div>
+        <span class="logo-text" style="font-size: 18px;">DreamBuZZ</span>
+      </div>
+      <div class="section-tag">12 — The Ask</div>
+    </div>
+    <div class="content">
+      <h2>Investment <span class="accent">Opportunity</span></h2>
+      <p class="subtitle" style="margin-bottom: 32px;">Join us in building the future of dream-powered wellness.</p>
+      <div class="grid-3" style="gap: 24px; margin-bottom: 28px;">
+        <div class="card-navy" style="text-align: center; padding: 36px 24px;">
+          <div style="font-size: 48px; font-weight: 700; color: var(--gold);">$5M</div>
+          <div style="font-size: 14px; margin-top: 8px;">AUD Raising</div>
+          <div style="font-size: 12px; opacity: 0.6; margin-top: 2px;">Seed Round</div>
+        </div>
+        <div class="card-navy" style="text-align: center; padding: 36px 24px;">
+          <div style="font-size: 48px; font-weight: 700; color: var(--gold);">$25M</div>
+          <div style="font-size: 14px; margin-top: 8px;">Pre-Money Valuation</div>
+          <div style="font-size: 12px; opacity: 0.6; margin-top: 2px;">20% Dilution</div>
+        </div>
+        <div class="card-navy" style="text-align: center; padding: 36px 24px;">
+          <div style="font-size: 48px; font-weight: 700; color: var(--gold);">12</div>
+          <div style="font-size: 14px; margin-top: 8px;">Months Runway</div>
+          <div style="font-size: 12px; opacity: 0.6; margin-top: 2px;">To Series A</div>
+        </div>
+      </div>
+      <div class="grid-2" style="gap: 24px;">
+        <div class="card" style="border: 1px solid var(--gold); padding: 24px;">
+          <h3 style="color: var(--navy); margin-bottom: 12px; font-size: 14px;">Why Invest Now</h3>
+          <ul>
+            <li>$18.5T wellness market growing 8.6% annually</li>
+            <li>Proven 80% retention with early users</li>
+            <li>Unique AI + community moat</li>
+            <li>Clear path to $80M revenue by Y5</li>
+            <li>First-mover in AI dream interpretation</li>
+          </ul>
+        </div>
+        <div class="card" style="border: 1px solid var(--gold); padding: 24px;">
+          <h3 style="color: var(--navy); margin-bottom: 12px; font-size: 14px;">Investment Terms</h3>
+          <ul>
+            <li>SAFE or priced equity round</li>
+            <li>Minimum ticket: $100K AUD</li>
+            <li>Pro-rata rights for follow-on</li>
+            <li>Board observer seat ($500K+)</li>
+            <li>Quarterly investor updates</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="footer" style="color: var(--text-muted);">
+      <span>DreamBuzz — Confidential</span>
+      <span>13</span>
+    </div>
+  </div>
+
+  <!-- SLIDE 14: Thank You -->
+  <div class="slide slide-dark" style="display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center;">
+    <div class="confidential">Confidential — For Investor Review Only</div>
+    <div style="position: absolute; top: 40px; left: 60px;">
+      <div class="logo">
+        <div class="logo-mark">
+          <svg viewBox="0 0 24 24"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+        </div>
+        <span class="logo-text">DreamBuZZ</span>
+      </div>
+    </div>
+    <div>
+      <h1 style="font-size: 44px; margin-bottom: 16px;">Let's Build the Future<br>of <span class="accent">Dream Wellness</span></h1>
+      <p class="subtitle" style="margin: 0 auto 40px; text-align: center; max-width: 520px;">Join 30,000+ dreamers already unlocking their potential. The next chapter starts with you.</p>
+      <div class="grid-3" style="max-width: 480px; margin: 0 auto 40px; gap: 16px;">
+        <div class="metric-box">
+          <div class="value">$5M</div>
+          <div class="label">Raising</div>
+        </div>
+        <div class="metric-box">
+          <div class="value">$25M</div>
+          <div class="label">Valuation</div>
+        </div>
+        <div class="metric-box">
+          <div class="value">80%</div>
+          <div class="label">Retention</div>
+        </div>
+      </div>
+      <div>
+        <p style="font-size: 16px; font-weight: 600; color: var(--gold);">Nuzhat Jahan</p>
+        <p style="font-size: 13px; opacity: 0.7; margin-top: 6px;">Lahara.Jahan@gmail.com</p>
+        <p style="font-size: 13px; opacity: 0.7;">WhatsApp: +64 27 490 4137</p>
+      </div>
+    </div>
+  </div>
+
+</body>
+</html>
