@@ -42,3 +42,11 @@ next-env.d.ts
 # supabase cli local cache
 supabase/.temp
 supabase/.branches
+
+# local project tooling
+.claude/
+
+# stray docs / drops that don't belong in the repo
+DNS-administrasjon.pdf
+CAPITAL RAISE/
+
